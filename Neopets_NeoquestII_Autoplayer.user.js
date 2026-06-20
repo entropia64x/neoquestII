@@ -1,8 +1,8 @@
 // ==UserScript==
-// @name         Neopets: Old NeoQuest II: Autoplayer
-// @namespace    https://github.com/entropia64x/neopets/
-// @version      2.0
-// @description  Remote control and trainer for NeoQuest II (Modification of NQ2Guy scripts)
+// @name         NeoQuest II Autoplayer
+// @namespace    https://github.com/entropia64x/neoquestII/
+// @version      3.0
+// @description  Remote control and trainer for NeoQuest II
 // @author       entropia64x
 // @match        https://www.neopets.com/games/nq2/nq2*
 // @grant        GM_log
@@ -14,7 +14,7 @@
 // @grant        GM_xmlhttpRequest
 // @grant        GM_getResourceText
 // @include      https://www.neopets.com/games/nq2/nq2.phtml*
-// @icon          https://www.google.com/s2/favicons?sz=64&domain=neopets.com
+// @icon         https://www.google.com/s2/favicons?sz=64&domain=neopets.com
 // ==/UserScript==
 
 /*
@@ -37,7 +37,7 @@ Notes on coordinates
   let training = 0; //1 = true, 0 = false. Works at Level 7.
   let stop = 0; //1 = true, 0 = false. Works any time.
 
-  //GM_setValue('path', path);
+  GM_setValue('path', path);
   let pathIndex = GM_getValue('pathIndex', 0);
   let hiccup = document.getElementsByClassName('contentModuleHeader')[0];
   let randomEvent = document.getElementsByClassName('randomEvent')[0];
@@ -92,7 +92,11 @@ Notes on coordinates
     }
 
     function isTraining() {
-      if (GM_getValue('rohaneLevel') < 7 && links[1].textContent == 'Hunting') {
+      if (
+          (GM_getValue('rohaneLevel') < 7 ||
+          training) &&
+          links[1].textContent == 'Hunting'
+      ) {
           location.href = 'nq2.phtml?act=travel&mode=2';
       }
       switch (GM_getValue('rohaneLevel')) {
@@ -148,7 +152,7 @@ Notes on coordinates
       } else {
         GM_setValue('pathIndex', 0);
         if (rohaneLevel >= 7 || rohaneLevel > GM_getValue('rohaneLevel', 1)) {
-          if ((!training && rohaneLevel >= 7) || (rohaneLevel < 7 && rohaneLevel > GM_getValue('rohaneLevel', 1))) {
+          if (((!training && rohaneLevel >= 7) || (rohaneLevel < 7 && rohaneLevel > GM_getValue('rohaneLevel', 1))) && path) {
             alert('You have arrived at your destination. Please disable this script to take control.');
           } else if(training) {
             GM_setValue('pathIndex', 1);
@@ -171,9 +175,9 @@ Notes on coordinates
       let targ_item = 0;
       healthBar: for (let n = 0; n < images.length; n++) {
         switch (images[n].src) {
-          case 'http://images.neopets.com/nq2/x/exp_red.gif':
-          case 'http://images.neopets.com/nq2/x/exp_yellow.gif':
-          case 'http://images.neopets.com/nq2/x/exp_green.gif':
+          case 'https://images.neopets.com/nq2/x/exp_red.gif':
+          case 'https://images.neopets.com/nq2/x/exp_yellow.gif':
+          case 'https://images.neopets.com/nq2/x/exp_green.gif':
             targ_char++;
             healingItem = '300';
             if (images[n].width <= 42) { //max 75
@@ -384,12 +388,12 @@ Notes on coordinates
       //loop through all pictures when it's velm's turn
       for (let l = 0; l < images.length; l++) {
         //makes sure the script isn't checking enemies hp
-        if (images[l].src == 'http://images.neopets.com/nq2/x/donothing.gif') {
+        if (images[l].src == 'https://images.neopets.com/nq2/x/donothing.gif') {
           allies = true;
         } //if checking allies HP
         if (allies) {
           //is the picture a health bar?
-          if (images[l].src == 'http://images.neopets.com/nq2/x/exp_green.gif') {
+          if (images[l].src == 'https://images.neopets.com/nq2/x/exp_green.gif') {
             if (images[l].width >= 30) //45 is full health
             {
               fullhp++;
