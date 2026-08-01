@@ -3,7 +3,8 @@
 // @namespace    https://github.com/entropia64x/neoquestII/
 // @version      3.3
 // @description  Remote control and trainer for NeoQuest II
-// @author       entropia64x// @match        https://www.neopets.com/games/nq2/nq2*
+// @author       entropia64x
+// @match        https://www.neopets.com/games/nq2/nq2*
 // @grant        GM_log
 // @grant        GM_addStyle
 // @grant        GM_getValue
