@@ -24,7 +24,7 @@ takes the portal and ends with Tebor (trader) inside White River City
 1 unit below dark cave entrance to Tebor (trader) inside White River City
 844444444444444484444888888884444844444482666333
 
-Many options and training:
+Many options and training
 ============================================================{
 1 unit right of Tebor (trader) to 1 unit right underground cave entrance (inside)
 44777777777777777488844
@@ -50,7 +50,7 @@ Start at level 13
 8884822844477777771111517744362222222222222284453555511111222
 Return for training
 111122228888883511111111111111744366282222666666633351153553
-============================================================}
+=============================================================}
 
 1 unit left of mysterious tower to Tebor (cheaper potions)
 1551555535555355333336666663333355555111171115551135553666666666662666333
