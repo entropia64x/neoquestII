@@ -8,21 +8,36 @@
 Return for training and rest
 12222262222222268444444444
 
-1 unit below dark cave exit (inside) to somewhere near miner (George) foreman (thanks hey3423)
+ 
 Start at level 8.5 hunting
-88288228228888444444744447777777777177744848822666366626622222222666
+1 unit below dark cave exit (inside) to the first railway in gray
+88288228228888444444744447777777777177744848822666366626622222222662
+
 Start at level 10
-2222266333333333336333336666662
+The first railway in gray to somewhere near miner foreman George
+6222266333333333336333336666662
+
+Start at level 10: fights with George,
+takes the portal and ends with Tebor (trader) inside White River City
+62222663333333333363333366666622222844444444444444484444888888884444844444482666333
 
 1 unit below dark cave entrance to Tebor (trader) inside White River City
 844444444444444484444888888884444844444482666333
 
-Many options and training
-{
+Many options and training:
+============================================================{
 1 unit right of Tebor (trader) to 1 unit right underground cave entrance (inside)
 44777777777777777488844
 1 unit right of underground cave entrance to 1 unit right of Tebor (trader)
 335553666666666662666333
+
+1 unit right of Tebor (trader) to 1 unit left diagonal of mysterious tower
+447777777777777774888448822222226222888884444477777744444888888888448882
+1 unit let diagonal of Mysterious Tower to 1 unit right of Tebor (trader)
+5155335555555553333366666633333555551117111111155335553666666666662666333
+
+1 unit right of Tebor (trader) to somewhere near Zombom fight at level 13
+4477777777777777748884488222222262228888844444777777444448888888884488828884822844477777771111517744362222222222222284453555511111222
 
 1 unit right of Underground Cave to 1 unit left diagonal of mysterious tower
 Start at level 11
@@ -31,14 +46,11 @@ Return
 5155335555555553333366666633333555551117111111155
 
 1 unit left diagonal of mysterious tower to somewhere near Zombom
-Start at level 12
+Start at level 13
 8884822844477777771111517744362222222222222284453555511111222
 Return for training
-1112222288884833511111111111111743366282222666666633351153555
-
-1 unit right of Tebor (trader) to somewhere near zombom
-4477777777777777748884488222222262228888844444777777444448888888884488828884822844477777771111517744362222222222222284453555511111222
-}
+111122228888883511111111111111744366282222666666633351153553
+============================================================}
 
 1 unit left of mysterious tower to Tebor (cheaper potions)
 1551555535555355333336666663333355555111171115551135553666666666662666333
@@ -212,18 +224,19 @@ Allden to 1 unite left of cave icon
 Should be near level 28
 53555111555
 
-INSIDE Lost caves, 1 unit left of cave icon to outside
+INSIDE Lost caves: 1 unit left of cave icon to outside
+We are going upstairs
 {
 Level 1 
 153355553333355115355355117155553333533333333553662222266355111
 
-Level 2
+Level 2: 1 unit below stairs going down (we are going up)
 282844444711111115115333351744744
 
-Level 3
+Level 3: 1 unit above stairs
 1111355555
 
-Level 4
+Level 4: 1 unit below stairs
 Options (Normal because the healing items should be low)
 -{
 Talk to the Snowager
@@ -251,16 +264,16 @@ From start point to Phebiya
 
 Options
 {
-From  Phebiya to Sabaliz (trader)
+From  Phebiya to Sabaliz (weapon trader)
 78222633333333364
 
 Go left to meet Rathua
 
-From Phebiya to Rathuah (trader)
+From Phebiya to Rathuah (potions trader)
 782226333333333363333
 }
 
-1 unit right of Rathuah (trader) to Temple of the Sky
+1 unit right of Rathuah (potions trader) to Temple of the Sky
 444474717777774444444444
 
 INSIDE Temple of the sky (bottom middle) 1st level to somewhere near Siliclast
@@ -286,6 +299,10 @@ Level 4
 44444448666688882222228
 
 Talk to Phebiya
+55555111156
+
+From Phebiya to Rathuah (potions trader)
+782226333333333363333
 
 From Rathuah to 1 unit left of Velm (in Waset village)
 444474711111111117747477111155115551711114488
@@ -304,10 +321,10 @@ Palace of ancient kings teleport orb destination to Lifra. Talk with her.
 (Start 2 units below southeast icon of palace of ancient kings)
 444477777777777777777771117788488888884448444444728484477
 
-1 unit left of Lifra to Pankal (trader) Buy sword
+1 unit left of Lifra to Pankal (Weapons trader) Buy sword
 6633535566662
 
-Go up to trade with Erweb
+Go up to trade with Erweb (Potions trader)
 
 1 unit rigth down diagonal of Erweb to Bukaru (Say password)
 444555555555555111111111111111155555553333333333333333
@@ -336,7 +353,7 @@ Pyramid level 1 to somewhere near Anubits. Fight at level 41
 Level 1
 33333511111111153333333333663333333553333333333622222222288444488444444774884488848244488444488226633366223333333333333333333333333333311111111557771
 Level 2 and 3
-22288444444447153333355111117882884741111111
+222884444444471533333551111178828847411111111
 ```
 
 
@@ -368,7 +385,7 @@ Train until level 47
 633336622222222222222222882222226265
 
 1 unit right the Faeries (1 unit down of a corner tree) to Nox Fortress
-35555555555555555553333333333333333336666666333555333666622288844744
+35555555555555555553333333333333333336666666333555333666622288844747
 
 Nox fortress level 1 to somewhere near Hubrid Nox (WOOHOO!)
 1115333511117845562222222287455622651111744755744444442226336663366447557753351114482222633628444444777115512263622226555111717748888226715333335
@@ -391,7 +408,7 @@ Gustano to Calam (weapon's trader)
 
 1 unit above Calam (trader) to somewhere near Fallen angel
 Fight at level 52
-66622262626262266622228822822226663366288888844774448
+666222626262622666222288228222266633662888888447744488
 
 Go right to find Vilaria
 
@@ -431,8 +448,9 @@ From here in normal.
 5111111111153511111111111111111115117111117777
 
 Go up to meet Stenvela
+11111111
 
-1 unit below Stenvela to 1 unit below Vitrini (by entropia8x)
+1 unit below Stenvela to 1 unit below Vitrini (by entropia64x)
 4444447711177774471557444828711111533333555551117444444444711111111115333333336222222633362222266336666226363362228448222222266633333333335551111111111777744775335577447155333335111111782877711174444447448444488211
 
 1 unit below Vitrini to Pant devil (right side)
@@ -449,7 +467,7 @@ Go up to meet Stenvela
 
 1 unit below vitrini to somewhere near terask battle #1 
 (get the key pieced together by Vitrini!)
-444444488822288844448222222222266633333333336222222222287174444444444863348226362178847515335115336882263362111
+44444448882228884444822222222226663333333333622222222228717444444444486334822636217884751533511533688226336211117
 
 Go up to use the portal
 
