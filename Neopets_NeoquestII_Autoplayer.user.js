@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Neopets: NeoQuest II: Autoplayer
 // @namespace    https://github.com/entropia64x/neoquestII/
-// @version      3.5
+// @version      3.6
 // @description  Remote control and trainer for NeoQuest II
 // @author       entropia64x
 // @match        https://www.neopets.com/games/nq2/nq2*
@@ -30,10 +30,10 @@ Notes on coordinates
 8 = southeast
 */
 
-(function() {
+(function () {
   'use strict';
   //Change just these 3 variables
-  let path = ''; //The path to follow. Works at Level 10.
+  let path = '222222222222877444477711778284482222222633336633333511511115626511111111744444777'; //The path to follow. Works at Level 10.
   let training = 0; //1 = true, 0 = false. Works at Level 10.
   const stop = 0; //1 = true, 0 = false. Works any time.
 
@@ -44,7 +44,6 @@ Notes on coordinates
   } else {
     const frame = document.querySelector('.frame');
     const images = frame.querySelectorAll('img');
-    const links = frame.querySelectorAll('a');
 
     const ACTION = {
       NEXT: 1,
@@ -72,7 +71,7 @@ Notes on coordinates
       VELM_GROUP_HEALING: 9402,
       VELM_GROUP_SHIELDING: 9403,
       VELM_MESMERIZE: 9404,
-      VELM_CELESTIAL_HAMMER: 9405
+      VELM_CELESTIAL_HAMMER: 9405,
     };
 
     const ICON = {
@@ -81,20 +80,15 @@ Notes on coordinates
       BEGIN: 'com_begin.gif',
       ATTACK: 'com_atk.gif',
       NEXT: 'com_next.gif',
-      END: 'com_end.gif'
+      END: 'com_end.gif',
     };
 
     const ACTOR = {
       ROHANE: 1,
       MIPSY: 2,
       TALINIA: 3,
-      VELM: 4
+      VELM: 4,
     };
-
-    const pathIndex = GM_getValue('pathIndex', 0);
-    let hasHealItems = GM_getValue('hasHealItems', true);
-
-    let fact;
 
     for (let i = images.length - 1; i >= 0; i--) {
       switch (images[i].src.split('/').at(-1)) {
@@ -104,8 +98,8 @@ Notes on coordinates
         case ICON.TOMAP:
           if (GM_getValue('inv')) {
             healBeforeGo();
-          }
-          else { // Return to map
+          } else {
+            // Return to map
             go('nq2.phtml?finish=1');
           }
           break;
@@ -127,37 +121,42 @@ Notes on coordinates
     function go(url) {
       location.href = url;
     }
-/*====  MAP ICON  ====*/
+    /*====  MAP ICON  ====*/
     function mapIcon() {
-      let level = readLevel();
+      const pathIndex = GM_getValue('pathIndex', 0);
+      let level = readLevel(pathIndex);
       let oldLevel = GM_getValue('oldRohaneLevel', 1);
       let inv = checkHealth();
-
-      if (inv && hasHealItems) { //Open Inventory
-          GM_setValue('inv', inv);
-          go('nq2.phtml?act=inv');
+      //Open Inventory
+      if (inv && GM_getValue('hasHealItems', true)) {
+        GM_setValue('inv', true);
+        go('nq2.phtml?act=inv');
       }
-      else if (oldLevel < level && level < 40) { //Assing skill
+      //Assing skill
+      else if (oldLevel < level && level < 40) {
         GM_setValue('oldRohaneLevel', level);
-        let skopt = getOption(level);
-        go(`nq2.phtml?act=skills&buy_char=1&buy_char=1&confirm=1&skopt_${skopt}=1`);
+        let skopt = getSkill(level);
+        go(
+          `nq2.phtml?act=skills&buy_char=1&buy_char=1&confirm=1&skopt_${skopt}=1`
+        );
       }
-      else if (isHunting(level)) { //Hunting mode
+      //Hunting mode
+      else if (isHunting(level)) {
         go('nq2.phtml?act=travel&mode=2');
       }
+      //Decide path
       else {
-          if (pathIndex == 0) {
-            path = getPath(level);
-            GM_setValue('path', path);
-          }
-          decidePath(level);
+        if (pathIndex == 0) {
+          path = getPath(level);
+          GM_setValue('path', path);
+        }
+        decidePath(level, pathIndex);
       }
     }
 
-    function readLevel() {
+    function readLevel(pathIndex) {
       let table = frame.querySelector('table');
       let level = +table.rows[1].cells[1].textContent;
-      GM_setValue('rohaneLevel', level);
 
       if (level == 1 && pathIndex == 0) {
         GM_setValue('oldRohaneLevel', 1);
@@ -166,93 +165,66 @@ Notes on coordinates
       return level;
     }
 
-    function getOption(level) {
-      switch (level % 4) {
-        case 0:
-          return ACTION.ROHANE_STUNNING_STRIKES;
-          break;
-        case 1:
-          return ACTION.ROHANE_MELEE_HASTE;
-          break;
-        case 2:
-          return ACTION.ROHANE_DMG_INCREASE;
-          break;
-        case 3:
-          return ACTION.ROHANE_CRIT_ATK;
-          break;
-      }
+    function getSkill(level) {
+      const skills = [
+        ACTION.ROHANE_STUNNING_STRIKES,
+        ACTION.ROHANE_MELEE_HASTE,
+        ACTION.ROHANE_DMG_INCREASE,
+        ACTION.ROHANE_CRIT_ATK,
+      ];
+      return skills[level % 4];
     }
 
     function isHunting(level) {
-      if (
-          (level < 10 ||
-          training) &&
-          links[1].textContent == 'Hunting'
-      ) {
+      if ((level < 10 || training) && isHuntingLinkActive()) {
         return true;
       }
       return false;
     }
 
-    function getPath(level) {
-      let first;
-      switch (level) {
-        case 1:
-          return '33334444';
-          break;
-        case 2:
-          return '3333344444';
-          break;
-        case 3:
-          return '333333444444';
-          break;
-        case 4:
-          return '3333333344444444';
-          break;
-        case 5:
-          return '333333333331212121244444444444';
-          break;
-        case 6:
-        case 7:
-          GM_setValue('first', true);
-          return '33333333357111111117111112222262222222268444444444';
-          break;
-        case 8:
-          first = GM_getValue('first', true);
-          if (first) {
-            GM_setValue('first', false);
-            return '3333333335711111111711111188288228228888444444744447777777777177744848822666366626622222222662';
-          }
-          else {
-            return '34';
-          }
-          break;
-        case 9:
-          GM_setValue('first', true);
-          return '34';
-          break;
-        case 10:
-          first = GM_getValue('first', true);
-          if (first) {
-            GM_setValue('first', false);
-            return '62222663333333333363333366666622222844444444444444484444888888884444844444482666333';
-          }
-          else if (training){
-            return '34';
-          }
-          else {
-            return path;
-          }
-          break;
-        default:
-          if (training) {
-            return '34';
-          }
-          else {
-            return path;
-          }
-          break;
+    function isHuntingLinkActive() {
+      const links = frame.querySelectorAll('a');
+      for (let link of links) {
+        if(link.textContent.match(/Hunting/)) {
+          return true;
+        }
       }
+      return false;
+    }
+
+    function getPath(level) {
+      if ([7, 9].includes(level)) {
+        GM_setValue('first', true);
+      }
+
+      const paths = {
+        1: '33334444',
+        2: '3333344444',
+        3: '333333444444',
+        4: '3333333344444444',
+        5: '333333333331212121244444444444',
+        6: '33333333357111111117111112222262222222268444444444',
+        7: '33333333357111111117111112222262222222268444444444',
+        8: getFirstPath(
+          '3333333335711111111711111188288228228888444444744447777777777177744848822666366626622222222662',
+          '34'
+        ),
+        9: '34',
+        10: getFirstPath(
+          '62222663333333333363333366666622222844444444444444484444888888884444844444482666333',
+          training ? '34' : path
+        ),
+      };
+
+      return paths[level] ?? (training ? '34' : path);
+    }
+
+    function getFirstPath(firstPath, otherPath) {
+      if (GM_getValue('fisrt', true)) {
+        GM_setValue('first', false);
+        return firstPath;
+      }
+      return otherPath;
     }
 
     function checkHealth() {
@@ -261,7 +233,8 @@ Notes on coordinates
           case 'exp_green.gif':
           case 'exp_yellow.gif':
           case 'exp_red.gif':
-            if (img.width <= 45) { //Max 75
+            //Max 75
+            if (img.width <= 45) {
               return true;
             }
         }
@@ -269,26 +242,34 @@ Notes on coordinates
       return false;
     }
 
-    function decidePath(level) {
+    function decidePath(level, pathIndex) {
+      //Stop
       if (stop) {
-        GM_setValue('path','');
+        GM_setValue('path', '');
         restartPathIndex();
       }
-      else if (pathIndex < GM_getValue('path').length) { //Move
-        const direction = nextMove();
-        GM_setValue("pathIndex", pathIndex + 1);
+      //Move
+      else if (pathIndex < GM_getValue('path').length) {
+        const direction = nextMove(pathIndex);
+        GM_setValue('pathIndex', pathIndex + 1);
         go(`nq2.phtml?act=move&dir=${direction}`);
       }
-      else if (training || (level == 8 && !GM_getValue('first')) || level == 9) {
+      //Training: move left
+      else if (
+        training ||
+        (level == 8 && !GM_getValue('first')) ||
+        level == 9
+      ) {
         GM_setValue('pathIndex', 1);
-        go('nq2.phtml?act=move&dir=3'); //Move left
-      }
-      else {
+        go('nq2.phtml?act=move&dir=3');
+      } else {
         restartPathIndex();
-        if (level < 8) { //Rest with mother
+        //Rest with mother
+        if (level < 8) {
           go('nq2.phtml?act=talk&targ=10201&say=rest');
         }
-        else if (level > 10 || (level == 10 && !GM_getValue('first'))) { //Finish
+        //Finish
+        else if ((level > 10 || (level == 10 && !GM_getValue('first'))) && GM_getValue('path', true)) {
           let msg = 'You have arrived at your destination.\n';
           msg += 'Please disable this script to take control.';
           alert(msg);
@@ -297,57 +278,83 @@ Notes on coordinates
     }
 
     function restartPathIndex() {
-      //GM_setValue('path','');
       GM_setValue('pathIndex', 0);
     }
 
-    function nextMove() {
+    function nextMove(pathIndex) {
       return GM_getValue('path')[pathIndex];
     }
-/*=====  INVENTORY  ====*/
+    /*=====  INVENTORY  ====*/
     function healBeforeGo() {
-      let itemTable = frame.querySelectorAll('table')[3];
-      let [lowest, row] = lookForLowestPoints(itemTable);
+      const itemTable = getTable(/Healing/);
+
+      if (!itemTable) {
+        GM_setValue('hasHealItems', false);
+        go('nq2.phtml');
+        return;
+      }
+
+      const [lowest, row] = lookForLowestPoints(itemTable);
+
       if (!lowest) {
         GM_setValue('hasHealItems', false);
         go('nq2.phtml');
-      }
-      else {
+      } else {
         let [char, hp] = whoNeedsCure(lowest);
+
         if (char == -1) {
           GM_setValue('inv', false);
           go('nq2.phtml');
-        }
-        else if (!hp) {
-            resurrect();
-        }
-        else {
-          let id = getLowestId(itemTable, row);
+        } else if (!hp) {
+          resurrect();
+        } else {
+          const id = getLowestId(itemTable, row);
           if (id) {
-            GM_setValue('hasHealItems', true);
-            go(`nq2.phtml?act=inv&iact=use&targ_item=${id}&targ_char=${char+1}`);
-          }
-          else {
-            GM_setValue('hasHealItems', false);
-             go('nq2.phtml');
+            go(
+              `nq2.phtml?act=inv&iact=use&targ_item=${id}&targ_char=${char + 1}`
+            );
+          } else {
+            go('nq2.phtml');
           }
         }
       }
+    }
+
+    function getTable(word) {
+      const tables = frame.querySelectorAll('table');
+      for (let table of tables) {
+        if(table.textContent.match(word)) {
+          return table;
+        }
+      }
+      return null;
     }
 
     function lookForLowestPoints(itemTable) {
       let heal_points;
-      let str;
+      let lowest;
+
       for (let i = itemTable.rows.length - 1; i > 0; i--) {
-        str = itemTable.rows[i].cells[2].textContent;
+        let str = itemTable.rows[i].cells[2].textContent;
         heal_points = str.match(/heal (\d+)/);
-        if (heal_points != null) {
+
+        if (heal_points) {
           GM_setValue('hasHealItems', true);
           return [+heal_points[1], i];
         }
       }
+
       GM_setValue('hasHealItems', false);
       return [false, false];
+    }
+
+    function getLowestId(itemTable, row) {
+      let str;
+      if (row) {
+        str = itemTable.rows[row].cells[3].innerHTML;
+        return str.match(/targ_item=(\d+)/)[1];
+      }
+      return false;
     }
 
     function whoNeedsCure(lowest) {
@@ -369,7 +376,7 @@ Notes on coordinates
     }
 
     function resurrect() {
-      links = frame.querySelectorAll('a');
+      const links = frame.querySelectorAll('a');
       for (let link of links) {
         if (link.href.includes(304)) {
           go(link.href);
@@ -378,42 +385,25 @@ Notes on coordinates
       }
     }
 
-    function getLowestId(itemTable, row) {
-      let str;
-      if (row) {
-        str = itemTable.rows[row].cells[3].innerHTML;
-        return str.match(/targ_item=(\d+)/)[1];
-      }
-      return false;
-    }
-    
-/*====  BATTLE ====*/
+    /*====  BATTLE ====*/
     function battle() {
       let fonts = frame.querySelectorAll('font');
       let [nxactor, font] = whoseTurn(fonts);
       let orange = '#d0d000';
 
-      if (font.color == 'red' ||
-          (nxactor == ACTOR.MIPSY && font.color == orange))
-          {
+      if (
+        font.color == 'red' ||
+        (nxactor == ACTOR.MIPSY && font.color == orange)
+      ) {
         healOrFlee(nxactor, font);
-      }
-      else {
-        let hitTarget = getTarget();
-        switch(nxactor) {
-          case ACTOR.ROHANE:
-            rohaneAction(nxactor, hitTarget);
-            break;
-          case ACTOR.MIPSY:
-            mipsyAction(nxactor, hitTarget);
-            break;
-          case ACTOR.TALINIA(nxactor, hitTarget):
-            taliniaAction(nxactor);
-            break;
-          case ACTOR.VELM:
-            velmAction(nxactor, hitTarget);
-            break;
-        }
+      } else {
+        const actorsActions = {
+          1: rohaneAction,
+          2: mipsyAction,
+          3: taliniaAction,
+          4: velmAction,
+        };
+        actorsActions[nxactor](nxactor, getTarget());
       }
     }
 
@@ -422,27 +412,23 @@ Notes on coordinates
         switch (fonts[i].innerHTML) {
           case '<b>Rohane</b>':
             return [ACTOR.ROHANE, fonts[i + 1]];
-            break;
           case '<b>Mipsy</b>':
             return [ACTOR.MIPSY, fonts[i + 1]];
-            break;
           case '<b>Talinia</b>':
             return [ACTOR.TALINIA, fonts[i + 1]];
-            break;
           case '<b>Velm</b>':
             return [ACTOR.VELM, fonts[i + 1]];
-            break;
         }
       }
     }
 
     function healOrFlee(nxactor, font) {
-      fact = ACTION.USE_ITEM;
       let hp$full = font.textContent.match(/(\d+)\/(\d+)/);
       let hp = +hp$full[1];
       let full = +hp$full[2];
-      let [healPoints, td] = searchBestPoints(full - hp);
-      if (!healPoints) {
+      let useid = lookForBestPotion(full - hp);
+
+      if (!useid) {
         let msg = 'Stopped due to lack of potions.\n';
         msg += `Path=${GM_getValue('path')}, pathIndex=${GM_getValue('pathIndex')}`;
         alert(msg);
@@ -450,116 +436,114 @@ Notes on coordinates
         GM_setValue('pathIndex', 0);
         GM_setValue('path', '');
         go(`q2.phtml?&fact=${ACTION.FLEE}`);
-      }
-      else {
-        let useid = getPotionCode(healPoints, td);
-        go(`nq2.phtml?&fact=${fact}&use_id=${useid}&nxactor=${nxactor}`);
+      } else {
+        GM_setValue('hasHealItems', true);
+        go(
+          `nq2.phtml?&fact=${ACTION.USE_ITEM}&use_id=${useid}&nxactor=${nxactor}`
+        );
       }
     }
 
-    function searchBestPoints(dif) {
+    function lookForBestPotion(dif) {
       const tds = frame.querySelectorAll('td');
       let allPoints;
+      let allCodes;
       let best = false;
-      let td;
-      for (td of tds) {
+
+      for (let td of tds) {
         allPoints = td.textContent.match(/heal (\d+)/g);
-        if (allPoints) break;
-      }
-      let points;
-      for (let healpoints of allPoints.reverse()) {
-        points = +healpoints.match(/\d+/);
-        if (dif > points || !best) {
-          best = points;
+        allCodes = td.innerHTML.match(/(300\d+)/g);
+        if (allPoints) {
+          for (let i = allPoints.length - 1; i >= 0; i--) {
+            points = +allPoints[i].match(/\d+/);
+            if (dif >= points || !best) {
+              best = allCodes[i].match(/\d+/)[0];
+            }
+          }
+          break;
         }
       }
-      return [best, td];
-    }
-    
-    function getPotionCode(healPoints, td) {
-      let link = td.querySelector('a');
-      return link.onclick.toString().match(/300\d+/);
+
+      return best;
     }
 
     function getTarget() {
       let chTarget = frame.querySelector('.ch').name;
       let chTarget200 = frame.querySelector('.ch200');
       if (chTarget200) chTarget = chTarget200.name;
-      switch (chTarget) {
-        case 'ch6':
-          return 6;
-          break;
-        case 'ch7':
-          return 7;
-          break;
-        case 'ch8':
-          return 8;
-          break;
-        default:
-          return 5;
-          break;
-      }
+      const targets = {
+        'ch5': 5,
+        'ch6': 6,
+        'ch7': 7,
+        'ch8':8,
+      };
+      return(targets[chTarget]);
     }
-    
+
     function rohaneAction(nxactor, hitTarget) {
-      fact = ACTION.ATTACK;
-      go(`nq2.phtml?&fact=${fact}&target=${hitTarget}&nxactor=${nxactor}`);
+      go(
+        `nq2.phtml?&fact=${ACTION.ATTACK}&target=${hitTarget}&nxactor=${nxactor}`
+      );
     }
 
     function mipsyAction(nxactor, hitTarget) {
       if (isCasted(/Hasted/)) {
-        fact = ACTION.MIPSY_GROUP_HASTE;
-        go(`nq2.phtml?&fact=${fact}`);
-      }
-      else {
-        fact = ACTION.MIPSY_DIRECT_DAMAGE;
-        go(`nq2.phtml?&fact=${fact}&target=${hitTarget}&nxactor=${nxactor}`);
+        go(`nq2.phtml?&fact=${ACTION.MIPSY_GROUP_HASTE}`);
+      } else {
+        go(
+          `nq2.phtml?&fact=${ACTION.MIPSY_DIRECT_DAMAGE}&target=${hitTarget}&nxactor=${nxactor}`
+        );
       }
     }
 
     function taliniaAction(nxactor, hitTarget) {
-      fact = ACTION.ATTACK;
-      let multipleTargets = /Multiple Targets/;
+      let multipleTargets = isLink(/Multiple Targets/);
+      if (multipleTargets) {
+        go(`nq2.phtml?&fact=${ACTION.TALINIA_MULTI}&nxactor={nxactor}`);
+      } else {
+        go(
+          `nq2.phtml?&fact=${ACTION.ATTACK}&target=${hitTarget}&nxactor=${nxactor}`
+        );
+      }
+    }
+
+    function isLink(multipleTargets) {
       const links = frame.querySelectorAll('a');
       for (let link of links) {
         if (link.innerHTML.search(multipleTargets) != -1) {
-          fact = ACTION.TALINIA_MULTI;
-          break;
+          return true;
         }
       }
-      go(`nq2.phtml?&fact=${fact}&target=${hitTarget}&nxactor=${nxactor}`);
+      return false;
     }
 
     function velmAction(nxactor, hitTarget) {
       let actorsHealed = checkGroupHp();
       if (actorsHealed < 4) {
-        fact = ACTION.VELM_GROUP_HEALING;
-        go(`nq2.phtml?&fact=${fact}`)
-      }
-      else if (!isCasted(/Def/)){
-        fact = ACTION.VELM_GROUP_SHIELDING;
-        go(`nq2.phtml?&fact=${fact}`);
-      }
-      else {
-        fact = ACTION.ATTACK;
-        go(`nq2.phtml?&fact=${fact}&target=${hitTarget}&nxactor=${nxactor}`);
+        go(`nq2.phtml?&fact=${ACTION.VELM_GROUP_HEALING}`);
+      } else if (!isCasted(/Def/)) {
+        go(`nq2.phtml?&fact=${ACTION.VELM_GROUP_SHIELDING}`);
+      } else {
+        go(
+          `nq2.phtml?&fact=${ACTION.ATTACK}&target=${hitTarget}&nxactor=${nxactor}`
+        );
       }
     }
-    
+
     function isCasted(magic) {
       const tds = frame.querySelectorAll('td');
       const msg = /Messages/;
-  
+
       for (let i = tds.length - 1; i > 0; i--) {
-        if (tds[i].textContent.search(magic)) {
+        if (tds[i].textContent.search(magic) != -1) {
           return true;
         }
-        if (tds[i].textContent.search(msg)) {
+        if (tds[i].textContent.search(msg) != -1) {
           return false;
         }
       }
     }
-    
+
     function checkGroupHp() {
       let actorsHealed = 0;
       let allies = false;
@@ -570,8 +554,8 @@ Notes on coordinates
         }
         if (allies) {
           if (img.src.split('/').at(-1) == 'exp_green.gif') {
-            if (img.width >= 30) //45 is full health
-            {
+            //45 is full health
+            if (img.width >= 30) {
               actorsHealed++;
             }
           }
