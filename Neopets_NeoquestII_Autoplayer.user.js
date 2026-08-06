@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Neopets: NeoQuest II: Autoplayer
 // @namespace    https://github.com/entropia64x/neoquestII/
-// @version      3.7
+// @version      3.8
 // @description  Remote control and trainer for NeoQuest II
 // @author       entropia64x
 // @match        https://www.neopets.com/games/nq2/nq2*
@@ -33,12 +33,14 @@ Notes on coordinates
 (function () {
   'use strict';
   //Change just these 3 variables
-  let path = '555555551555115333363633633333333333333551'; //The path to follow. Works at Level 10.
+  let path =
+    '33335553355551155555555555555335333355333333555636333333355155366633336633363511777155366366626'; //The path to follow. Works at Level 10.
   let training = 0; //1 = true, 0 = false. Works at Level 10.
   const stop = 0; //1 = true, 0 = false. Works any time.
 
   const header = document.querySelector('.contentModuleHeader');
   const randomEvent = document.querySelector('.randomEvent');
+
   if (!header || randomEvent) {
     location.href = 'nq2.phtml';
   } else {
@@ -102,7 +104,7 @@ Notes on coordinates
       location.href = url;
     }
 
-    /*===================================  ICON CASES  ===================================*/
+    /*=============================  ICON CASES  =============================*/
 
     function mapIcon() {
       let inv = whoNeedsCure(GM_getValue('lowest', 15), /Health/)[0];
@@ -113,6 +115,7 @@ Notes on coordinates
         go('nq2.phtml?act=inv');
         return;
       }
+
       const pathIndex = GM_getValue('pathIndex', 0);
       const level = readLevel(pathIndex);
       const oldLevel = GM_getValue('oldRohaneLevel', 1);
@@ -183,7 +186,7 @@ Notes on coordinates
       go(`nq2.phtml?&fact=${ACTION.END}`);
     }
 
-    /*===================================  MAP ICON  ===================================*/
+    /*==============================  MAP ICON  ==============================*/
 
     function whoNeedsCure(lowest, word) {
       const partyTable = getTable(word);
@@ -346,7 +349,7 @@ Notes on coordinates
       return GM_getValue('path')[pathIndex];
     }
 
-    /*===================================  INVENTORY  ===================================*/
+    /*=============================  INVENTORY  =============================*/
 
     function healBeforeGo() {
       const [useid, lowest] = lookForBestPotion(
@@ -378,18 +381,18 @@ Notes on coordinates
       const itemTable = getTable(word);
 
       if (!itemTable) {
-        return false;
+        return [false, false];
       }
 
       let allPoints = itemTable.textContent.match(action);
-      let allCodes = itemTable.innerHTML.match(partialCode);
+      let allCodes = [...new Set(itemTable.innerHTML.match(partialCode))];
       let points = 0;
       let best = false;
 
       for (let i = allPoints.length - 1; i >= 0; i--) {
         points = +allPoints[i].match(/\d+/);
 
-        if (dif >= points || !best) {
+        if (dif > points || !best) {
           best = allCodes[i].match(/\d+/)[0];
 
           if (!dif) break;
@@ -401,6 +404,7 @@ Notes on coordinates
 
     function resurrect() {
       const links = frame.querySelectorAll('a');
+
       for (let link of links) {
         if (link.href.includes(304)) {
           go(link.href);
@@ -409,7 +413,7 @@ Notes on coordinates
       }
     }
 
-    /*===================================  BATTLE ===================================*/
+    /*===============================  BATTLE ===============================*/
 
     function whoseTurn(fonts) {
       for (let i = fonts.length - 1; i >= 0; i--) {
@@ -482,8 +486,8 @@ Notes on coordinates
     }
 
     function mipsyAction(nxactor, hitTarget) {
-      if (isCasted(/Hasted/)) {
-        go(`nq2.phtml?&fact=${ACTION.MIPSY_GROUP_HASTE}`);
+      if (isLink(/Group Haste/) && !isCasted(/Hasted/)) {
+        go(`nq2.phtml?&fact=${ACTION.MIPSY_GROUP_HASTE}&nxactor=${nxactor}`);
       } else {
         go(
           `nq2.phtml?&fact=${ACTION.MIPSY_DIRECT_DAMAGE}&target=${hitTarget}&nxactor=${nxactor}`
@@ -491,27 +495,41 @@ Notes on coordinates
       }
     }
 
-    function taliniaAction(nxactor, hitTarget) {
-      let multipleTargets = isLink(/Multiple Targets/);
+    function isLink(phrase) {
+      const links = frame.querySelectorAll('a');
 
-      if (multipleTargets) {
+      for (let link of links) {
+        if (link.innerHTML.search(phrase) != -1) {
+          return true;
+        }
+      }
+
+      return false;
+    }
+
+    function isCasted(magic) {
+      const tds = frame.querySelectorAll('td');
+      const msg = /Messages/;
+
+      for (let i = tds.length - 1; i > 0; i--) {
+        if (tds[i].textContent.search(magic) != -1) {
+          return true;
+        }
+
+        if (tds[i].textContent.search(msg) != -1) {
+          return false;
+        }
+      }
+    }
+
+    function taliniaAction(nxactor, hitTarget) {
+      if (isLink(/Multiple Targets/)) {
         go(`nq2.phtml?&fact=${ACTION.TALINIA_MULTI}&nxactor=${nxactor}`);
       } else {
         go(
           `nq2.phtml?&fact=${ACTION.ATTACK}&target=${hitTarget}&nxactor=${nxactor}`
         );
       }
-    }
-
-    function isLink(multipleTargets) {
-      const links = frame.querySelectorAll('a');
-
-      for (let link of links) {
-        if (link.innerHTML.search(multipleTargets) != -1) {
-          return true;
-        }
-      }
-      return false;
     }
 
     function velmAction(nxactor, hitTarget) {
@@ -528,20 +546,6 @@ Notes on coordinates
       }
     }
 
-    function isCasted(magic) {
-      const tds = frame.querySelectorAll('td');
-      const msg = /Messages/;
-
-      for (let i = tds.length - 1; i > 0; i--) {
-        if (tds[i].textContent.search(magic) != -1) {
-          return true;
-        }
-        if (tds[i].textContent.search(msg) != -1) {
-          return false;
-        }
-      }
-    }
-
     function checkGroupHp() {
       let actorsHealed = 0;
       let allies = false;
@@ -551,6 +555,7 @@ Notes on coordinates
           allies = true;
           continue;
         }
+
         if (allies) {
           if (img.src.split('/').at(-1) == 'exp_green.gif') {
             //45 is full health
