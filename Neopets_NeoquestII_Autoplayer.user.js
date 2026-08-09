@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Neopets: NeoQuest II: Autoplayer
 // @namespace    https://github.com/entropia64x/neoquestII/
-// @version      3.8
+// @version      3.9
 // @description  Remote control and trainer for NeoQuest II
 // @author       entropia64x
 // @match        https://www.neopets.com/games/nq2/nq2*
@@ -34,7 +34,7 @@ Notes on coordinates
   'use strict';
   //Change just these 3 variables
   let path =
-    '33335553355551155555555555555335333355333333555636333333355155366633336633363511777155366366626'; //The path to follow. Works at Level 10.
+    ''; //The path to follow. Works at Level 10.
   let training = 0; //1 = true, 0 = false. Works at Level 10.
   const stop = 0; //1 = true, 0 = false. Works any time.
 
@@ -160,7 +160,10 @@ Notes on coordinates
       let fonts = frame.querySelectorAll('font');
       let [nxactor, font] = whoseTurn(fonts);
       let orange = '#d0d000';
-
+      /*const = [
+        'Miner Foreman',
+        'Zombom'
+      ];*/
       if (
         font.color == 'red' ||
         (nxactor == ACTOR.MIPSY && font.color == orange)
@@ -438,7 +441,7 @@ Notes on coordinates
         full - hp,
         /heal/,
         /heal (\d+)/g,
-        /(300\d+)/g
+        /(300\d{2})/g
       )[0];
 
       if (!useid) {
@@ -458,21 +461,20 @@ Notes on coordinates
     }
 
     function getTarget() {
-      let chTarget = frame.querySelector('.ch').name;
-      let chTarget200 = frame.querySelector('.ch200');
-      if (chTarget200) chTarget = chTarget200.name;
-      const targets = {
-        ch5: 5,
-        ch6: 6,
-        ch7: 7,
-        ch8: 8,
-      };
+      let links = frame.querySelectorAll('a');
+      let target = 5;
 
-      return targets[chTarget];
+      for (let link of links) {
+        target = +link.onclick.toString().match(/settarget\((\d+)\)/)[1];
+
+        if (target) break;
+      }
+
+      return target;
     }
 
     function rohaneAction(nxactor, hitTarget) {
-      const useid = lookForBestPotion(0, /dmg/, /dmg (\d+)/g, /(301\d+)/g)[0];
+      const useid = lookForBestPotion(0, /dmg/, /dmg (\d+)/g, /(301\d{2})/g)[0];
 
       if (useid) {
         go(
@@ -533,12 +535,10 @@ Notes on coordinates
     }
 
     function velmAction(nxactor, hitTarget) {
-      let actorsHealed = checkGroupHp();
-
-      if (actorsHealed < 4) {
-        go(`nq2.phtml?&fact=${ACTION.VELM_GROUP_HEALING}`);
+      if (actorsHealed() < 4) {
+        go(`nq2.phtml?&fact=${ACTION.VELM_GROUP_HEALING}&nxactor=${nxactor}`);
       } else if (!isCasted(/Def/)) {
-        go(`nq2.phtml?&fact=${ACTION.VELM_GROUP_SHIELDING}`);
+        go(`nq2.phtml?&fact=${ACTION.VELM_GROUP_SHIELDING}&nxactor=${nxactor}`);
       } else {
         go(
           `nq2.phtml?&fact=${ACTION.ATTACK}&target=${hitTarget}&nxactor=${nxactor}`
@@ -546,8 +546,8 @@ Notes on coordinates
       }
     }
 
-    function checkGroupHp() {
-      let actorsHealed = 0;
+    function actorsHealed() {
+      let healed = 0;
       let allies = false;
 
       for (let img of images) {
@@ -560,13 +560,13 @@ Notes on coordinates
           if (img.src.split('/').at(-1) == 'exp_green.gif') {
             //45 is full health
             if (img.width >= 30) {
-              actorsHealed += 1;
+              healed += 1;
             }
           }
         }
       }
 
-      return actorsHealed;
+      return healed;
     }
   }
 })();
