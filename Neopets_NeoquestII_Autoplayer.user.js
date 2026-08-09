@@ -160,10 +160,7 @@ Notes on coordinates
       let fonts = frame.querySelectorAll('font');
       let [nxactor, font] = whoseTurn(fonts);
       let orange = '#d0d000';
-      /*const = [
-        'Miner Foreman',
-        'Zombom'
-      ];*/
+      
       if (
         font.color == 'red' ||
         (nxactor == ACTOR.MIPSY && font.color == orange)
