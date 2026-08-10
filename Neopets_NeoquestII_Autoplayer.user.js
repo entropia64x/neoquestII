@@ -33,7 +33,7 @@ Notes on coordinates
 (function () {
   'use strict';
   //Change just these 3 variables
-  let path = ''; //The path to follow. Works at Level 10.
+  let path = '3518826666666628888884444444444488478848888448488884'; //The path to follow. Works at Level 10.
   let training = 0; //1 = true, 0 = false. Works at Level 10.
   const stop = 0; //1 = true, 0 = false. Works any time.
 
@@ -97,7 +97,10 @@ Notes on coordinates
       'Anubits',
       'Meuka',
       'Spider Grundo',
-      'Dark Faerie',
+      'a Dark Faerie',
+      'a Fire Faerie',
+      'a Water Faerie',
+      'an Earth Faerie',
       'Hubrid Nox',
       'Esophagor',
       'Fallen Angel',
@@ -527,7 +530,6 @@ Notes on coordinates
 
       for (let td of tds) {
         boss = td.textContent;
-
         if (boss) {
           if (bosses.includes(boss)) {
             return true;
