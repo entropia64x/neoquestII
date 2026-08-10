@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Neopets: NeoQuest II: Autoplayer
 // @namespace    https://github.com/entropia64x/neoquestII/
-// @version      3.9
+// @version      3.10
 // @description  Remote control and trainer for NeoQuest II
 // @author       entropia64x
 // @match        https://www.neopets.com/games/nq2/nq2*
@@ -33,8 +33,7 @@ Notes on coordinates
 (function () {
   'use strict';
   //Change just these 3 variables
-  let path =
-    ''; //The path to follow. Works at Level 10.
+  let path = ''; //The path to follow. Works at Level 10.
   let training = 0; //1 = true, 0 = false. Works at Level 10.
   const stop = 0; //1 = true, 0 = false. Works any time.
 
@@ -83,6 +82,31 @@ Notes on coordinates
       VELM: 4,
     };
 
+    const bosses = [
+      'Miner Foreman',
+      'Zombom',
+      'Giant Sand Grundo',
+      'Ramtor',
+      'Leximp',
+      'Kolvars',
+      'Scuzzy',
+      'Siliclast',
+      'Gebarn II',
+      'Revenant of the Dunes',
+      "Coltzan's Ghost",
+      'Anubits',
+      'Meuka',
+      'Spider Grundo',
+      'Dark Faerie',
+      'Hubrid Nox',
+      'Esophagor',
+      'Fallen Angel',
+      'Devilpuss',
+      'Faerie Thief',
+      'Pant Devil',
+      'King Terask',
+    ];
+
     const ICONS = {
       'nav.gif': mapIcon,
       'tomap.gif': toMap,
@@ -90,6 +114,23 @@ Notes on coordinates
       'com_atk.gif': battle,
       'com_next.gif': next,
       'com_end.gif': end,
+    };
+
+    const POTIONS = {
+      heal: {
+        regexPoints: /heal (\d+)/g,
+        regexCode: /(300\d{2})/g,
+      },
+
+      dmg: {
+        regexPoints: /dmg (\d+)/g,
+        regexCode: /(301\d{2})/g,
+      },
+
+      slow: {
+        regexPoints: /slow (\d+)/g,
+        regexCode: /(303\d{2})/g,
+      },
     };
 
     for (let i = images.length - 1; i >= 0; i--) {
@@ -160,7 +201,7 @@ Notes on coordinates
       let fonts = frame.querySelectorAll('font');
       let [nxactor, font] = whoseTurn(fonts);
       let orange = '#d0d000';
-      
+
       if (
         font.color == 'red' ||
         (nxactor == ACTOR.MIPSY && font.color == orange)
@@ -168,10 +209,10 @@ Notes on coordinates
         healOrFlee(nxactor, font);
       } else {
         const actorsActions = {
-          1: rohaneAction,
-          2: mipsyAction,
-          3: taliniaAction,
-          4: velmAction,
+          [ACTOR.ROHANE]: rohaneAction,
+          [ACTOR.MIPSY]: mipsyAction,
+          [ACTOR.TALINIA]: taliniaAction,
+          [ACTOR.VELM]: velmAction,
         };
 
         actorsActions[nxactor](nxactor, getTarget());
@@ -295,7 +336,7 @@ Notes on coordinates
     }
 
     function getFirstPath(firstPath, otherPath) {
-      if (GM_getValue('fisrt', true)) {
+      if (GM_getValue('first', true)) {
         GM_setValue('first', false);
         return firstPath;
       }
@@ -352,12 +393,7 @@ Notes on coordinates
     /*=============================  INVENTORY  =============================*/
 
     function healBeforeGo() {
-      const [useid, lowest] = lookForBestPotion(
-        0,
-        /Name/,
-        /heal (\d+)/g,
-        /(300\d+)/g
-      );
+      const [useid, lowest] = lookForBestPotion(0, 'heal');
 
       if (!useid) {
         GM_setValue('hasHealItems', false);
@@ -377,15 +413,16 @@ Notes on coordinates
       }
     }
 
-    function lookForBestPotion(dif, word, action, partialCode) {
-      const itemTable = getTable(word);
+    function lookForBestPotion(dif, type) {
+      const itemTable = getTable(type);
 
       if (!itemTable) {
         return [false, false];
       }
+      const potion = POTIONS[type];
 
-      let allPoints = itemTable.textContent.match(action);
-      let allCodes = [...new Set(itemTable.innerHTML.match(partialCode))];
+      let allPoints = itemTable.textContent.match(potion.regexPoints);
+      let allCodes = [...new Set(itemTable.innerHTML.match(potion.regexCode))];
       let points = 0;
       let best = false;
 
@@ -434,12 +471,7 @@ Notes on coordinates
       let hp$full = font.textContent.match(/(\d+)\/(\d+)/);
       let hp = +hp$full[1];
       let full = +hp$full[2];
-      let useid = lookForBestPotion(
-        full - hp,
-        /heal/,
-        /heal (\d+)/g,
-        /(300\d{2})/g
-      )[0];
+      let useid = lookForBestPotion(full - hp, 'heal')[0];
 
       if (!useid) {
         let msg = 'Stopped due to lack of potions.\n';
@@ -470,28 +502,93 @@ Notes on coordinates
       return target;
     }
 
-    function rohaneAction(nxactor, hitTarget) {
-      const useid = lookForBestPotion(0, /dmg/, /dmg (\d+)/g, /(301\d{2})/g)[0];
-
-      if (useid) {
-        go(
-          `nq2.phtml?&fact=${ACTION.USE_ITEM}&use_id=${useid}&target=${hitTarget}&nxactor=${nxactor}`
-        );
-      } else {
-        go(
-          `nq2.phtml?&fact=${ACTION.ATTACK}&target=${hitTarget}&nxactor=${nxactor}`
-        );
+    function rohaneAction(nxactor, target) {
+      if (isBoss()) {
+        if (!isSlowed()) {
+          if (usePotionIfAvailable('slow', nxactor, target)) {
+            return;
+          }
+        } else {
+          if (usePotionIfAvailable('dmg', nxactor, target)) {
+            return;
+          }
+        }
       }
+
+      go(
+        `nq2.phtml?&fact=${ACTION.ATTACK}&target=${target}&nxactor=${nxactor}`
+      );
     }
 
-    function mipsyAction(nxactor, hitTarget) {
+    function isBoss() {
+      const td1 = frame.querySelector('td');
+      const tds = td1.querySelectorAll('td');
+      let boss;
+
+      for (let td of tds) {
+        boss = td.textContent;
+
+        if (boss) {
+          if (bosses.includes(boss)) {
+            return true;
+          }
+
+          break;
+        }
+      }
+
+      return false;
+    }
+
+    function isSlowed() {
+      const td1 = frame.querySelector('td');
+      const tds = td1.querySelectorAll('td');
+
+      for (let td of tds) {
+        if (td.textContent.match(/Slowed/)) {
+          return true;
+        }
+      }
+
+      return false;
+    }
+
+    function usePotionIfAvailable(type, nxactor, target) {
+      const id = lookForBestPotion(0, type)[0];
+
+      if (!id) {
+        return false;
+      }
+
+      go(
+        `nq2.phtml?&fact=${ACTION.USE_ITEM}&use_id=${id}&target=${target}&nxactor=${nxactor}`
+      );
+
+      return true;
+    }
+
+    function mipsyAction(nxactor, target) {
       if (isLink(/Group Haste/) && !isCasted(/Hasted/)) {
         go(`nq2.phtml?&fact=${ACTION.MIPSY_GROUP_HASTE}&nxactor=${nxactor}`);
-      } else {
-        go(
-          `nq2.phtml?&fact=${ACTION.MIPSY_DIRECT_DAMAGE}&target=${hitTarget}&nxactor=${nxactor}`
-        );
+        return;
       }
+
+      if (isLink(/Damage Shields/) && !isCasted(/Damage Shields/)) {
+        go(`nq2.phtml?&fact=${ACTION.MIPSY_DAMAGE_SHIELDS}&nxactor=${nxactor}`);
+        return;
+      }
+
+      if (
+        isBoss() &&
+        !isSlowed() &&
+        usePotionIfAvailable('slow', nxactor, target)
+      ) {
+        return;
+      }
+
+      go(
+        `nq2.phtml?&fact=${ACTION.MIPSY_DIRECT_DAMAGE}&target=${target}&nxactor=${nxactor}`
+      );
     }
 
     function isLink(phrase) {
@@ -521,26 +618,37 @@ Notes on coordinates
       }
     }
 
-    function taliniaAction(nxactor, hitTarget) {
+    function taliniaAction(nxactor, target) {
+      if (
+        isBoss() &&
+        !isSlowed() &&
+        usePotionIfAvailable('slow', nxactor, target)
+      ) {
+        return;
+      }
+
       if (isLink(/Multiple Targets/)) {
         go(`nq2.phtml?&fact=${ACTION.TALINIA_MULTI}&nxactor=${nxactor}`);
-      } else {
-        go(
-          `nq2.phtml?&fact=${ACTION.ATTACK}&target=${hitTarget}&nxactor=${nxactor}`
-        );
+        return;
       }
+
+      go(
+        `nq2.phtml?&fact=${ACTION.ATTACK}&target=${target}&nxactor=${nxactor}`
+      );
     }
 
-    function velmAction(nxactor, hitTarget) {
+    function velmAction(nxactor, target) {
       if (actorsHealed() < 4) {
         go(`nq2.phtml?&fact=${ACTION.VELM_GROUP_HEALING}&nxactor=${nxactor}`);
-      } else if (!isCasted(/Def/)) {
-        go(`nq2.phtml?&fact=${ACTION.VELM_GROUP_SHIELDING}&nxactor=${nxactor}`);
-      } else {
-        go(
-          `nq2.phtml?&fact=${ACTION.ATTACK}&target=${hitTarget}&nxactor=${nxactor}`
-        );
+        return;
       }
+
+      if (!isCasted(/Def/)) {
+        go(`nq2.phtml?&fact=${ACTION.VELM_GROUP_SHIELDING}&nxactor=${nxactor}`);
+        return;
+      }
+
+      rohaneAction(nxactor, target);
     }
 
     function actorsHealed() {
