@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Neopets: NeoQuest II: Autoplayer
 // @namespace    https://github.com/entropia64x/neoquestII/
-// @version      3.10
+// @version      3.11
 // @description  Remote control and trainer for NeoQuest II
 // @author       entropia64x
 // @match        https://www.neopets.com/games/nq2/nq2*
@@ -33,7 +33,7 @@ Notes on coordinates
 (function () {
   'use strict';
   //Change just these 3 variables
-  let path = '3518826666666628888884444444444488478848888448488884'; //The path to follow. Works at Level 10.
+  let path = '75122'; //The path to follow. Works at Level 10.
   let training = 0; //1 = true, 0 = false. Works at Level 10.
   const stop = 0; //1 = true, 0 = false. Works any time.
 
@@ -102,7 +102,7 @@ Notes on coordinates
       'a Water Faerie',
       'an Earth Faerie',
       'Hubrid Nox',
-      'Esophagor',
+      'the Esophagor',
       'Fallen Angel',
       'Devilpuss',
       'Faerie Thief',
@@ -117,6 +117,7 @@ Notes on coordinates
       'com_atk.gif': battle,
       'com_next.gif': next,
       'com_end.gif': end,
+      'cont.gif': toMap,
     };
 
     const POTIONS = {
@@ -138,6 +139,7 @@ Notes on coordinates
 
     for (let i = images.length - 1; i >= 0; i--) {
       let icon = ICONS[images[i].src.split('/').at(-1)];
+
       if (icon) {
         icon();
         break;
@@ -168,9 +170,7 @@ Notes on coordinates
       if (oldLevel < level && level < 40) {
         GM_setValue('oldRohaneLevel', level);
         let skopt = getSkill(level);
-        go(
-          `nq2.phtml?act=skills&buy_char=1&buy_char=1&confirm=1&skopt_${skopt}=1`
-        );
+        go(`nq2.phtml?act=skills&buy_char=1&buy_char=1&confirm=1&skopt_${skopt}=1`);
       }
       //Hunting mode
       else if (isHunting(level)) {
@@ -201,14 +201,11 @@ Notes on coordinates
     }
 
     function battle() {
-      let fonts = frame.querySelectorAll('font');
-      let [nxactor, font] = whoseTurn(fonts);
-      let orange = '#d0d000';
+      const fonts = frame.querySelectorAll('font');
+      const [nxactor, font] = whoseTurn(fonts);
+      const orange = '#d0d000';
 
-      if (
-        font.color == 'red' ||
-        (nxactor == ACTOR.MIPSY && font.color == orange)
-      ) {
+      if (font.color == 'red' || (nxactor == ACTOR.MIPSY && font.color == orange)) {
         healOrFlee(nxactor, font);
       } else {
         const actorsActions = {
@@ -360,11 +357,7 @@ Notes on coordinates
         go(`nq2.phtml?act=move&dir=${direction}`);
       }
       //Training: move left
-      else if (
-        training ||
-        (level == 8 && !GM_getValue('first')) ||
-        level == 9
-      ) {
+      else if (training || (level == 8 && !GM_getValue('first')) || level == 9) {
         GM_setValue('pathIndex', 1);
         go('nq2.phtml?act=move&dir=3');
       } else {
@@ -486,9 +479,7 @@ Notes on coordinates
         go(`q2.phtml?&fact=${ACTION.FLEE}`);
       } else {
         GM_setValue('hasHealItems', true);
-        go(
-          `nq2.phtml?&fact=${ACTION.USE_ITEM}&use_id=${useid}&nxactor=${nxactor}`
-        );
+        go(`nq2.phtml?&fact=${ACTION.USE_ITEM}&use_id=${useid}&nxactor=${nxactor}`);
       }
     }
 
@@ -518,9 +509,7 @@ Notes on coordinates
         }
       }
 
-      go(
-        `nq2.phtml?&fact=${ACTION.ATTACK}&target=${target}&nxactor=${nxactor}`
-      );
+      go(`nq2.phtml?&fact=${ACTION.ATTACK}&target=${target}&nxactor=${nxactor}`);
     }
 
     function isBoss() {
@@ -562,9 +551,7 @@ Notes on coordinates
         return false;
       }
 
-      go(
-        `nq2.phtml?&fact=${ACTION.USE_ITEM}&use_id=${id}&target=${target}&nxactor=${nxactor}`
-      );
+      go(`nq2.phtml?&fact=${ACTION.USE_ITEM}&use_id=${id}&target=${target}&nxactor=${nxactor}`);
 
       return true;
     }
@@ -580,17 +567,11 @@ Notes on coordinates
         return;
       }
 
-      if (
-        isBoss() &&
-        !isSlowed() &&
-        usePotionIfAvailable('slow', nxactor, target)
-      ) {
+      if (isBoss() && !isSlowed() && usePotionIfAvailable('slow', nxactor, target)) {
         return;
       }
 
-      go(
-        `nq2.phtml?&fact=${ACTION.MIPSY_DIRECT_DAMAGE}&target=${target}&nxactor=${nxactor}`
-      );
+      go(`nq2.phtml?&fact=${ACTION.MIPSY_DIRECT_DAMAGE}&target=${target}&nxactor=${nxactor}`);
     }
 
     function isLink(phrase) {
@@ -621,11 +602,7 @@ Notes on coordinates
     }
 
     function taliniaAction(nxactor, target) {
-      if (
-        isBoss() &&
-        !isSlowed() &&
-        usePotionIfAvailable('slow', nxactor, target)
-      ) {
+      if (isBoss() && !isSlowed() && usePotionIfAvailable('slow', nxactor, target)) {
         return;
       }
 
@@ -634,9 +611,7 @@ Notes on coordinates
         return;
       }
 
-      go(
-        `nq2.phtml?&fact=${ACTION.ATTACK}&target=${target}&nxactor=${nxactor}`
-      );
+      go(`nq2.phtml?&fact=${ACTION.ATTACK}&target=${target}&nxactor=${nxactor}`);
     }
 
     function velmAction(nxactor, target) {
