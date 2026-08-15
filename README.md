@@ -218,8 +218,11 @@ Start at level 18.
 
 From 1 unit below Uthare to 1 unit left of Uthyni. Talk to him and choose:
 > "What do you know about the troubles at the castle?".
+> 
 > "Yes?"
+> 
 > "I'm sorry to hear that. I'll see what I can do about him."
+> 
 ```
 28444444444711174444444
 ```
@@ -291,25 +294,24 @@ The path is split into sections for training at each level:
 ## 2. Terror Mountain
 
 ### Options
+
 ====================={
+
 Beginning to Leximp (Normal mode).
 ```
 4487444477474444448848828888228888
 ```
-
 
 From 1 unit left of Leximp's old location to 1 unit diagonally below Jarasth (trader) inside Chia Oscuro (town).
 ```
 555555551555115333363633633333333333333551
 ```
 
-
 Complete path:
 ```
 4487444477474444448848828888228888555555551555115333363633633333333333333551
 ```
 =====================}
-
 
 
 Go left and down to meet Ullistl and create a checkpoint.
@@ -330,7 +332,6 @@ From 1 unit right of Ullistl to Caves of Terror.
 471533333387444477474444441774474444444444447744444477444444444444444444444444444444477777777777771
 ```
 
-
 **For training:**
 
 From 1 unit right of Ullistl and back to Jarasth (potion trader).
@@ -338,13 +339,11 @@ From 1 unit right of Ullistl and back to Jarasth (potion trader).
 47153333338744447747444444177447444444444444774444447744444444443333333333663333336633333333333363366233333363663333333333333551
 ```
 
-
 From 1 unit diagonally below Jarasth to Caves of Terror.
 ```
 284444444444444477474444441774474444444444447744444477444444444444444444444444444444477777777777771
 ```
 =============}
-
 
 From 1 unit below the Caves of Terror icon to 1 unit above Talinia.
 
@@ -353,12 +352,10 @@ Enter at level 24.
 115555333366636336333335553535333557777744444474444477747755533363355533535777115551774444744444484474711111177717111188
 ```
 
-
 Go right to trade with Borhal.
 ```
 444844
 ```
-
 
 From 1 unit left of Borhal to somewhere near boss Kolvars (hunting).
 
@@ -367,42 +364,35 @@ Fight at level 26.
 33335553355551155555555555555335333355333333555636333333355155366633336633363511777155366366626
 ```
 
-
 From 1 unit diagonally left of the tree near Kolvars to Jualie. Talk to Jualie.
 ```
 666666666222268111111111177744444471155
 ```
-
 
 From 1 unit diagonally below Jualie to 1 unit left of Niacha. Talk to her.
 ```
 88226333333666222222222237747744
 ```
 
-
 From 1 unit left of where Niacha used to be to 1 unit below Jualie and Niacha. Talk to them.
 ```
 666661111111111777444444711535
 ```
-
 
 From Jualie to Utolok (armor trader).
 ```
 847115333333511111111111744
 ```
 
-
 From Utolok to Arisso (weapon trader), then from Arisso to Vanne (potion trader).
 ```
 33511744
 ```
 
-
 From Vanne to Allden of the Camp. Rest there.
 ```
 335511116822282222288888888888844444444444444444744484444444488447774777747777717778
 ```
-
 
 From Allden to Level 2 of Lost Caves:
 
@@ -413,18 +403,15 @@ You should be near level 28.
 535551115555153355553333355115355355117155553333533333333553662222266355111
 ```
 
-
 Level 2: 1 unit below the stairs going down (we are going up).
 ```
 282844444711111115115333351744744
 ```
 
-
 Level 3: 1 unit above the stairs.
 ```
 1111355555
 ```
-
 
 Level 4: 1 unit below the stairs.
 
@@ -443,7 +430,6 @@ Continue.
 1115555555333333666666335555555355551111117171155333333333333333
 ```
 
-
 Ignore the Snowager (shorter path).
 ```
 222666222888266665555555333333666666335555555355551111117171155333333333333333
@@ -461,232 +447,377 @@ Fight at level 30.
 
 
 
-
 ## 3. Lost Desert
 
 From the start point to Phebiya.
+```
 3355555111156
+```
 
 From Phebiya to Sabaliz (weapon trader).
+```
 78222633333333364
+```
 
 Go left to meet Rathua.
+```
 333333
+```
 
 From 1 unit right of Rathuah (potion trader) to Temple of the Sky.
+```
 444474717777774444444444
+```
 
 **Inside Temple of the Sky (bottom middle):** from the 1st level to somewhere near Siliclast.
+
 Enter at level 31 and finish at level 33 in normal mode.
+```
 11111111553351115333333333333335511182262222228444777777777777444444444444888882222222222284826333333333351511111
+```
 
 From 1 unit diagonally left of the gray pillar to Phebiya. Talk to her.
+```
 51111155555111156
+```
 
 From Phebiya to Rathuah (potion trader).
+```
 782226333333333363333
+```
 
 From Rathuah to Ruined Temple.
+```
 444474711111111117747477111155115551
+```
 
 **Inside Ruined Temple, level 1:** to somewhere near Gebarn II.
+
 Train until level 35 or higher.
+
 **Level 1**
+```
 5111111111555511115335
+```
+
 **Level 2**
+```
 88822228448222263336263622844444444711174777111111111177744
+```
+
 **Level 3**
+```
 22222633333351111156268222222226633355511174777155533
+```
+
 **Level 4:** to Phebiya. *(The script autofights Gebarn II at some point.)*
+```
 44444448666688882222228222255555111156
+```
 
 From Phebiya to Rathuah (potion trader). **Sell and buy only 10 healing potions.**
+```
 782226333333333363333
+```
 
 From Rathuah to 1 unit left of Velm (in Waset Village).
+```
 444474711111111117747477111155115551711114488
+```
 
 From 1 unit left of Velm to Palace of Ancient Kings. **Do not buy anything yet.**
+```
 5553333335555555555333366666666666666666662226223355
+```
 
 From outside the Palace of Ancient Kings to Lifra. Talk to her.
-Start at level 36 and finish at 37.
-155551115555333555511111175366637111774847177711111111111111111111111111777
 
+Start at level 36 and finish at 37.
+```
+155551115555333555511111175366637111774847177711111111111111111111111111777
+```
 
 From Lifra's old location to Lifra in Waset Village (normal mode). Talk to her again.
+```
 6333355444477777777777777777771117788488888884448444444728484477
+```
 
 From 1 unit left of Lifra to Pankal (weapons trader). **Buy a sword.**
+```
 6633535566662
+```
 
 Go up to trade with Erweb (potion trader).
+```
 111
+```
 
 From 1 unit diagonally down and right of Erweb to Bukaru. **Say the password. Normal mode.**
+```
 444555555555555111111111111111155555553333333333333333
+```
 
 From 1 unit right of Bukaru to the second medallion piece (hunting).
+```
 77777777777777774444444444
+```
 
 From the second medallion piece to the Akhten-ka entrance.
+
 Level up to 39.
+```
 88888888888888888888884888882222228888888888888882222222222266663333335535551711
+```
 
 From the Akhten-ka entrance to somewhere near Coltzan's ghost.
+
 Fight at level 39.
+```
 111111111111111111111111555533333551111153351
+```
 
 Talk to Coltzan's ghost.
+
 Go around Coltzan's ghost and take the centerpiece over the barrel!
 
+
 From 1 unit right of the barrel to outside Akhten-ka. **Take the centerpiece first!**
+```
 22228488822228448844888222222222222222222222222
+```
 
 From outside Akhten-kha to the gemstone (normal mode).
+```
 62288884844444477771111111155555555555555511111111
+```
 
 From the gemstone to Zakharukh's Pyramid (normal mode).
+```
 1555555553333333333666666222222222888822222222222222222222266666666666666666222
+```
 
 From Zakharukh's Pyramid, level 1, to somewhere near Anubits. Fight at level 41.
-**Level 1**
-33333511111111153333333333663333333553333333333622222222288444488444444774884488848244488444488226633366223333333333333333333333333333311111111557771
-**Levels 2 and 3**
-222884444444471533333551111178828847411111111
 
+**Level 1**
+```
+33333511111111153333333333663333333553333333333622222222288444488444444774884488848244488444488226633366223333333333333333333333333333311111111557771
+```
+
+**Levels 2 and 3**
+```
+222884444444471533333551111178828847411111111
+```
 
 
 
 ## 4. Haunted Woods
 
 From the start point to Hunsev (weapon trader).
+```
 2222222266663333668
+```
 
 Go left to trade with Shan (potion trader).
+```
 3333
+```
 
 From 1 unit diagonally left of Shan to Von Roo's Castle, somewhere near Meuka (normal mode).
+
 Fight at level 43 or higher.
+```
 77444444448222222288262882222222282288884444447777477711111155511111111111114444444444444444444882224888444444444447115355333362515333633351111744484444484448887711153333113
+```
 
 Talk to Count von Roo.
+```
 55
+```
 
 From 1 unit below Count von Roo to Cave of Dark Things (hunting).
+```
 575577444444484484444447448822222222222888444477777884444444482884444711517444888844777
+```
 
 From 1 unit above the Cave of Dark Things entrance to Spider Grundo.
+
 Train until level 44 or higher.
+```
 2444444888888888444447777777748888882222222882822282262666336333535517747471153363333333333333333333333333333333888888888444444888444448822
+```
 
 Talk to Spider Grundo.
 
 From one unit above and northwest of Spider Grundo to Balthazar. **Talk to him.**
+```
 63363333333333333633333622226662226662222222888226666663333333333335553
+```
 
 From 1 unit right of Balthazar to Augur Faunt (trader) and the Brain Tree.
+
 Train until level 47.
+```
 5171111111111177747533336633555117884444447777753366333553336222284862662844444717488847115117111111533663336263511174444411155
+```
 
 Trade with Augur Faunt and talk to the Brain Tree.
+
 **Don't sell all the healing potions!**
 
 From 1 unit right of Augur Faunt to the fight with the faeries.
+```
 6333366222222222222222228822222262653
+```
 
 From 1 unit right of the Faeries (1 unit down from a corner tree) to Nox Fortress. Normal mode.
+```
 35555555555555555553333333333333333336666666333555333666622288844747
+```
 
 From Nox Fortress, level 1, to somewhere near Hubrid Nox. **WOOHOO!**
+```
 1115333511117845562222222287455622651111744755744444442226336663366447557753351114482222633628444444777115512263622226555111717748888226715333335
+```
 
 Talk to Hubrid Nox.
 
 From 1 unit diagonally right of Hubrid Nox to somewhere near Esophagor.
-Fight at level 50.
-3518826666666628888884444444444488478848888448488884
 
+Fight at level 50.
+```
+3518826666666628888884444444444488478848888448488884
+```
 
 
 
 ## Faerieland
 
 From the Faerieland start point to Gustano (potion trader in Northern Watchtower).
+```
 2222288882888888444448888888222228888886
+```
 
 From Gustano to Calam (weapon trader).
+
 (2 units below the stairs entrance on the first floor.)
+```
 75122
+```
 
 From 1 unit above Calam (trader) to somewhere near Fallen Angel.
+
 Fight at level 52.
+```
 666222626262622666222288228222266633662888888447744488
+```
 
 Go right to find Vilaria. **Talk to her.**
+```
 4444844444
+```
 
 From 1 unit left of Vilaria to Cumulonimbus.
+```
 22222266282826222888822822222866333366222222888266222622284444447488444777448227477744448888
+```
 
 From inside Cumulonimbus to somewhere near Devilpuss.
+
 Normal mode, but fight at level 53.
+```
 488884444711177117471533333333351111111111744444444444444444444444444448222662222263333336622226636362222663333622288444482222844444444444444444444444447111111115333351111111774444
+```
 
 From the center of four corners to Caereli (trader inside Cirrus Village).
+```
 4444477744447771555553535711777771144488263
+```
 
 From Caereli to Mekava (trader). Go down and left, or
+```
 48222263
+```
 
 From 1 unit diagonally right and below Mekava to Faerie City.
+```
 488224477115555717177111151511117744488848884844747777771111111
+```
 
 From here on, use normal mode.
 
 From 1 unit below Lusina to somewhere near Faerie Thief battle #1.
+```
 7117777744444471174447711115511111744825362633622288888666362244444448226333333333353
+```
 
 From 1 unit northwest of the blue pillar to 1 unit below Lusina. Talk to her.
+```
 4484444444444711551535775555511174471748453362222288222222333336226333336663362226
+```
 
 From 1 unit below Lusina to Faerie Thief battle #2.
+```
 3333333333333333351115555117111744777111777748448222222447482666333362222217482222
+```
 
 From 1 unit northwest of the table near Faerie Thief battle #2 to 1 unit below Lusina.
+```
 711115362211117444477715633571115335633662222666336226222888822844444444444444448
+```
 
 From 1 unit below Lusina to somewhere near Faerie Thief battle #3.
+```
 5111111111153511111111111111111115117111117777
+```
 
 Go up to meet Stenvela.
+```
 11111111
+```
 
 From 1 unit below Stenvela to 1 unit below Vitrini (by entropia64x).
+```
 4444447711177774471557444828711111533333555551117444444444711111111115333333336222222633362222266336666226363362228448222222266633333333335551111111111777744775335577447155333335111111782877711174444447448444488211
+```
 
 From 1 unit below Vitrini to the Pant Devil (right side).
+```
 44444448882228444475335744444471115626335156222265351533688634477
+```
 
 From the center of four pilars to 1 unit below Vitrini (right side).
+```
 6666755744828487111178284471782226333333684486333355511153333333
+```
 
 From 1 unit below Vitrini to the Pant Devil (left side).
+```
 3333333333336662226333357447533333351117828447178224471744822662843355
+```
 
 From the center of four pilars to 1 unit below Vitrini (left side).
+```
 888851771153362633315626335156222844444486336844447111777444444444444
+```
 
 From 1 unit below Vitrini to Kinig Terask battle #1.
+
 *(Get the key pieced together by Vitrini!)*
+```
 444444488822288844448222222222266633333333336222222222287174444444444863348226362178847515335115336882263362111177
+```
 
 Go up to use the portal.
+```
 71111111
+```
 
 Two units left of a gate to Lyra (normal mode).
+```
 71111111111744444444447771111111111533335551115553333333333333333333666222666333362222222222888444444444482222222222263515711571533362222666226535511111111144863622284444822228444444451111111551533622222222263336
+```
 
 From 1 unit right of Lyra to King Terask (the final battle). *(Thanks, hey3423.)*
+```
 5111111111115288888888
-
+```
