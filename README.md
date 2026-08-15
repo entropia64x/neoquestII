@@ -12,6 +12,7 @@ The first paths are included for nostalgia.
 
 From 1 unit diagonally from Mother to 1 unit below the dark cave entrance (inside)
 33333333357111111117111111
+
 Return for training and rest.
 12222262222222268444444444
 
@@ -35,16 +36,22 @@ From 1 unit below the dark cave entrance to Tebor (trader) inside White River Ci
 ## HERE YOU START TO PLAY
 
 ### Options
+
 ============================================================{
+
 From 1 unit right of Tebor (trader) to 1 unit right and down from the underground cave entrance (inside).
+
 Train until level 11.
 447777777777777774888442
+
 Return.
 535553666666666662666333
 
 From 1 unit right of Tebor (trader) to 1 unit diagonally left of the Mysterious Tower.
+
 Train until level 13.
 447777777777777774888448822222226222888884444477777744444888888888448882
+
 Return.
 5155335555555553333366666633333555551117111111155335553666666666662666333
 
@@ -58,8 +65,10 @@ Return.
 5155335555555553333366666633333555551117111111155
 
 From 1 unit diagonally left of the Mysterious Tower to somewhere near Zombom.
+
 Start at level 13.
 8884822844477777771111517744362222222222222284453555511111222
+
 Return.
 111122228888883511111111111111744366282222666666633351153553
 =============================================================}
