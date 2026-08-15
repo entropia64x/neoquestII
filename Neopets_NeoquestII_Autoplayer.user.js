@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Neopets: NeoQuest II: Autoplayer
 // @namespace    https://github.com/entropia64x/neoquestII/
-// @version      3.13
+// @version      3.14
 // @description  Remote control and trainer for NeoQuest II
 // @author       entropia64x
 // @match        https://www.neopets.com/games/nq2/nq2*
@@ -33,7 +33,7 @@ Notes on coordinates
 (function () {
   'use strict';
   //Change just these 3 variables
-  let path = ''; //The path to follow. Works at Level 10.
+  let path = '5155335555555553333366666633333555551117111111155335553666666666662666333'; //The path to follow. Works at Level 10.
   let training = 0; //1 = true, 0 = false. Works at Level 10.
   const stop = 0; //1 = true, 0 = false. Works any time.
 
@@ -86,10 +86,10 @@ Notes on coordinates
     };
 
     const ACTOR = {
-      ROHANE: 1,
-      MIPSY: 2,
-      TALINIA: 3,
-      VELM: 4,
+      Rohane: 1,
+      Mipsy: 2,
+      Talinia: 3,
+      Velm: 4,
     };
 
     const bosses = [
@@ -210,7 +210,7 @@ Notes on coordinates
       }
     }
 
-    /*=============================  MAIN CASES  =============================*/
+    /*================================  MAP  ================================*/
 
     function mapIcon() {
       let inv = whoNeedsCure(GM_getValue('lowest', 15), 'Health')[0];
@@ -232,36 +232,6 @@ Notes on coordinates
 
       decidePath(level);
     }
-
-    function battle() {
-      const [nxactor, font] = whoseTurn();
-      const orange = '#d0d000';
-
-      if (font.color == 'red' || (nxactor == ACTOR.MIPSY && font.color == orange)) {
-        healOrFlee(nxactor, font);
-        return;
-      }
-
-      const actorsActions = {
-        [ACTOR.ROHANE]: rohaneAction,
-        [ACTOR.MIPSY]: mipsyAction,
-        [ACTOR.TALINIA]: taliniaAction,
-        [ACTOR.VELM]: velmAction,
-      };
-
-      let action = ACTION.ATTACK;
-      let id = false;
-
-      [action, id] = actorsActions[nxactor](action, id);
-
-      let submit = `settarget(${getTarget()}); `;
-      submit += `setaction(${action}); `;
-      submit += `setitem(${id}); `;
-      submit += `setch(ch${nxactor}); document.ff.submit();`;
-      goJS(submit);
-    }
-
-    /*================================  MAP  ================================*/
 
     function openInventory(inv) {
       if (inv && GM_getValue('hasHealItems', true)) {
@@ -288,6 +258,10 @@ Notes on coordinates
       const oldLevel = GM_getValue('oldRohaneLevel', 1);
 
       if (oldLevel < level) {
+        if ([7, 9].includes(level)) {
+          GM_setValue('first', true);
+        }
+
         GM_setValue('oldRohaneLevel', level);
         let skopt = getSkill(level);
         go(`?act=skills&buy_char=1&buy_char=1&confirm=1&skopt_${skopt}=1`);
@@ -329,10 +303,6 @@ Notes on coordinates
     }
 
     function getPath(level) {
-      if ([7, 9].includes(level)) {
-        GM_setValue('first', true);
-      }
-
       const paths = {
         1: '33334444',
         2: '3333344444',
@@ -341,13 +311,9 @@ Notes on coordinates
         5: '333333333331212121244444444444',
         6: '33333333357111111117111113434342222262222222268444444444',
         7: '33333333357111111117111113434343434343434342222262222222268444444444',
-        8: getFirstPath(
-          '3333333335711111111711111188288228228888444444744447777777777177744848822666366626622222222662',
-          '34'
-        ),
-        9: '34',
+        8: '3333333335711111111711111188288228228888444444744447777777777177744848822666366626622222222662',
         10: getFirstPath(
-          '62222663333333333363333366666622222844444444444444484444888888884444844444482666333',
+          '2222663333333333363333366666622222844444444444444484444888888884444844444482666333',
           training ? '34' : path
         ),
       };
@@ -367,7 +333,7 @@ Notes on coordinates
     function decidePath(level) {
       const pathIndex = GM_getValue('pathIndex', 0);
 
-      if (pathIndex === 0) {
+      if (pathIndex == 0) {
         path = getPath(level);
         GM_setValue('path', path);
       }
@@ -375,29 +341,59 @@ Notes on coordinates
       if (stop) {
         GM_setValue('path', '');
         restartPathIndex();
-      } else if (pathIndex < GM_getValue('path').length) {
+        return;
+      }
+
+      //Move
+      if (pathIndex < GM_getValue('path').length) {
         const direction = nextMove(pathIndex);
         GM_setValue('pathIndex', pathIndex + 1);
-        goJS(`dosub(${direction})`); //Move
-      } else if (training || (level == 8 && !GM_getValue('first')) || level == 9) {
-        GM_setValue('pathIndex', 1);
-        goJS(3); //Move left
-      } else {
-        restartPathIndex();
+        goJS(`dosub(${direction})`);
+        return;
+      }
 
-        //Rest with mother
-        if (level < 8) {
-          go('?act=talk&targ=10201&say=rest');
-        }
-        //Stop
-        else if (
-          (level > 10 || (level == 10 && !GM_getValue('first'))) &&
-          GM_getValue('path', true)
-        ) {
-          let msg = 'You have arrived at your destination.\n';
-          msg += 'Please disable this script to take control.';
-          alert(msg);
-        }
+      if ((level == 8 && GM_getValue('path') == '34') || level == 9) {
+        training = 1;
+      }
+
+      if (training) {
+        GM_setValue('pathIndex', 1);
+        goJS('dosub(3)'); //Move left
+        return;
+      }
+
+      restartPathIndex();
+
+      //Stop
+      if ((level > 10 || (level == 10 && !GM_getValue('first'))) && GM_getValue('path', true)) {
+        let msg = 'You have arrived at your destination.\n';
+        msg += 'Please disable this script to take control.';
+        alert(msg);
+        return;
+      }
+
+      //Rest with mother
+      if (level < 8) {
+        go('?act=talk&targ=10201&say=rest');
+        return;
+      }
+
+      if (level == 8 && GM_getValue('first')) {
+        GM_setValue('first', false);
+        go('?act=talk&targ=10201&say=rest');
+        return;
+      }
+
+      if (level == 8 && !GM_getValue('first')) {
+        GM_setValue('path', '34');
+        GM_setValue('pathIndex', 1);
+        goJS('dosub(3)');
+        return;
+      }
+
+      if (level == 10 && GM_getValue('first')) {
+        goJS('dosub(6)');
+        return;
       }
     }
 
@@ -412,9 +408,9 @@ Notes on coordinates
     /*=============================  INVENTORY  =============================*/
 
     function healBeforeGo() {
-      const [useid, lowest] = lookForBestPotion(0, 'heal');
+      const [id, lowest] = lookForBestPotion(0, 'heal');
 
-      if (!useid) {
+      if (!id) {
         go();
         return;
       }
@@ -427,9 +423,8 @@ Notes on coordinates
       } else if (!hp) {
         resurrect();
       } else {
-        go(`?act=inv&iact=use&targ_item=${useid}&targ_char=${char}`);
+        go(`?act=inv&iact=use&targ_item=${id}&targ_char=${char}`);
       }
-
     }
 
     function whoNeedsCure(lowest, word) {
@@ -461,7 +456,10 @@ Notes on coordinates
       const itemTable = getTable(type);
 
       if (!itemTable) {
-        GM_setValue('hasHealItems', false);
+        if (type == 'heal') {
+          GM_setValue('hasHealItems', false);
+        }
+
         return [false, false];
       }
 
@@ -474,7 +472,7 @@ Notes on coordinates
       for (let i = allPoints.length - 1; i >= 0; i--) {
         points = +allPoints[i].match(/\d+/);
 
-        if (i == allPoints.length - 1) {
+        if (type == 'heal' && i == allPoints.length - 1) {
           GM_setValue('lowest', points);
         }
 
@@ -503,25 +501,85 @@ Notes on coordinates
 
     /*===============================  BATTLE ===============================*/
 
-    function whoseTurn() {
-      const fonts = frame.querySelectorAll('font');
+    function battle() {
+      const battleState = setBattleState();
+      const nxactor = battleState.actor;
+      const color = battleState.color;
+      const orange = '#d0d000';
 
-      for (let i = fonts.length - 1; i >= 0; i--) {
-        switch (fonts[i].innerHTML) {
-          case '<b>Rohane</b>':
-            return [ACTOR.ROHANE, fonts[i + 1]];
-          case '<b>Mipsy</b>':
-            return [ACTOR.MIPSY, fonts[i + 1]];
-          case '<b>Talinia</b>':
-            return [ACTOR.TALINIA, fonts[i + 1]];
-          case '<b>Velm</b>':
-            return [ACTOR.VELM, fonts[i + 1]];
-        }
+      if (color == 'red' || (nxactor == ACTOR.Mipsy && color == orange)) {
+        healOrFlee(battleState);
+        return;
       }
+
+      const actorsActions = {
+        [ACTOR.Rohane]: rohaneAction,
+        [ACTOR.Mipsy]: mipsyAction,
+        [ACTOR.Talinia]: taliniaAction,
+        [ACTOR.Velm]: velmAction,
+      };
+
+      let action = ACTION.ATTACK;
+      let id = false;
+
+      [action, id] = actorsActions[nxactor](action, id, battleState);
+
+      let submit = `settarget(${battleState.target}); `;
+      submit += `setaction(${action}); `;
+      submit += `setitem(${id}); `;
+      submit += `setch(ch${nxactor}); document.ff.submit();`;
+      goJS(submit);
     }
 
-    function getTarget() {
-      let links = frame.querySelectorAll('a');
+    function setBattleState() {
+      const form = frame.querySelector('FORM');
+      const fonts = frame.querySelectorAll('font');
+      const tds = frame.querySelectorAll('td');
+      const tds1 = tds[0].querySelectorAll('td');
+      const links = frame.querySelectorAll('a');
+
+      const nxactor = nextActor(form);
+      const hpInfo = getHpInfo(nxactor, fonts);
+      const textColor = hpInfo.color;
+      const hpArray = hpInfo.textContent.match(/(\d+)\/(\d+)/);
+      const hp = +hpArray[1];
+      const fullhp = +hpArray[2];
+
+      let battleState = {
+        actor: nxactor,
+        color: textColor,
+        healPotion: lookForBestPotion(fullhp - hp, 'heal')[0],
+        isBoss: isBoss(tds1),
+        target: getTarget(links),
+      };
+
+      if (battleState.isBoss) {
+        battleState.dmgPotion = lookForBestPotion(0, 'dmg')[0];
+        battleState.slowPotion = lookForSlowPotion();
+        battleState.isSlowed = isSlowed(tds1);
+      }
+
+      if (nxactor == ACTOR.Mipsy) {
+        battleState.canHaste = isLink('Group Haste', links);
+        battleState.canShield = isLink('Damage Shields', links);
+
+        battleState.hasted = isCasted('Haste', tds);
+        battleState.dmgShields = isCasted('Damage Shield', tds);
+      }
+
+      if (nxactor == ACTOR.Talinia) {
+        battleState.multipleTargets = isLink('Multiple Targets', links);
+      }
+
+      if (nxactor == ACTOR.Velm) {
+        battleState.actorsHealed = actorsHealed();
+        battleState.areProtected = isCasted('Def', tds);
+      }
+
+      return battleState;
+    }
+
+    function getTarget(links) {
       let target = 5;
 
       for (let link of links) {
@@ -533,36 +591,43 @@ Notes on coordinates
       return target;
     }
 
-    function healOrFlee(nxactor, font) {
-      let hp$full = font.textContent.match(/(\d+)\/(\d+)/);
-      let hp = +hp$full[1];
-      let full = +hp$full[2];
-      let id = lookForBestPotion(full - hp, 'heal')[0];
+    function healOrFlee(battleState) {
+      const id = battleState.healPotion;
+      const nxactor = battleState.actor;
 
-      if (!id) {
-        let msg = 'Stopped due to lack of potions.\n';
-        msg += `Path=${GM_getValue('path')}, pathIndex=${GM_getValue('pathIndex')}`;
-        alert(msg);
-        GM_setValue('hasHealItems', false);
-        GM_setValue('pathIndex', 0);
-        GM_setValue('path', '');
-        go(`?&fact=${ACTION.FLEE}`);
-      } else {
-        GM_setValue('hasHealItems', true);
-        go(`?&fact=${ACTION.USE_ITEM}&use_id=${id}&nxactor=${nxactor}`);
+      if (id) {
+        heal(id, nxactor);
+        return;
       }
+
+      flee();
+    }
+
+    function heal(id, nxactor) {
+      GM_setValue('hasHealItems', true);
+      go(`?&fact=${ACTION.USE_ITEM}&use_id=${id}&nxactor=${nxactor}`);
+    }
+
+    function flee() {
+      let msg = 'Stopped due to lack of heal potions.\n';
+      msg += `Path=${GM_getValue('path')}, pathIndex=${GM_getValue('pathIndex')}`;
+      alert(msg);
+      GM_setValue('hasHealItems', false);
+      GM_setValue('pathIndex', 0);
+      GM_setValue('path', '');
+      go(`?&fact=${ACTION.FLEE}`);
     }
 
     /*=========================  CHARACTER ACTIONS  =========================*/
 
-    function rohaneAction(action, id) {
-      if (isBoss()) {
-        if (!isSlowed()) {
-          id = lookForSlowPotion();
+    function rohaneAction(action, id, battleState) {
+      if (battleState.isBoss) {
+        if (battleState.isSlowed) {
+          id = battleState.slowPotion;
         }
 
         if (!id) {
-          id = lookForBestPotion(0, 'dmg')[0];
+          id = battleState.dmgPotion;
         }
 
         if (id) {
@@ -573,15 +638,15 @@ Notes on coordinates
       return [action, id];
     }
 
-    function mipsyAction(action, id) {
+    function mipsyAction(action, id, battleState) {
       action = ACTION.MIPSY_DIRECT_DAMAGE;
 
-      if (isLink(/Group Haste/) && !isCasted(/Hasted/)) {
+      if (battleState.canHaste && !battleState.hasted) {
         action = ACTION.MIPSY_GROUP_HASTE;
-      } else if (isLink(/Damage Shields/) && !isCasted(/Damage Shield/)) {
+      } else if (battleState.canShield && !battleState.dmgShields) {
         action = ACTION.MIPSY_DAMAGE_SHIELDS;
-      } else if (isBoss() && !isSlowed()) {
-        id = lookForSlowPotion();
+      } else if (battleState.isBoss && !battleState.isSlowed) {
+        id = battleState.slowPotion;
 
         if (id) {
           action = ACTION.USE_ITEM;
@@ -591,27 +656,27 @@ Notes on coordinates
       return [action, id];
     }
 
-    function taliniaAction(action, id) {
-      if (isBoss() && !isSlowed()) {
-        id = lookForSlowPotion();
+    function taliniaAction(action, id, battleState) {
+      if (battleState.isBoss && !battleState.isSlowed) {
+        id = battleState.slowPotion;
 
         if (id) {
           action = ACTION.USE_ITEM;
         }
-      } else if (isLink(/Multiple Targets/)) {
+      } else if (battleState.multipleTargets) {
         action = ACTION.TALINIA_MULTI;
       }
 
       return [action, id];
     }
 
-    function velmAction(action, id) {
-      if (actorsHealed() < 4) {
+    function velmAction(action, id, battleState) {
+      if (battleState.actorsHealed < 4) {
         action = ACTION.VELM_GROUP_HEALING;
-      } else if (!isCasted(/Def/)) {
+      } else if (!battleState.areProtected) {
         action = ACTION.VELM_GROUP_SHIELDING;
       } else {
-        [action, id] = rohaneAction(action, id);
+        [action, id] = rohaneAction(action, id, battleState);
       }
 
       return [action, id];
@@ -619,13 +684,34 @@ Notes on coordinates
 
     /*==========================  BATTLE QUERIES  ===========================*/
 
-    function isBoss() {
-      const td1 = frame.querySelector('td');
-      const tds = td1.querySelectorAll('td');
+    function nextActor(form) {
+      for (let i = form.length - 1; i >= 0; i--) {
+        if (form[i].name == 'nxactor') {
+          return +form[i].value;
+        }
+      }
+    }
+
+    function getNameByValue(object, value) {
+      return Object.keys(object).find((key) => object[key] === value);
+    }
+
+    function getHpInfo(nxactor, fonts) {
+      const name = getNameByValue(ACTOR, nxactor);
+
+      for (let i = fonts.length - 1; i > 0; i--) {
+        if (fonts[i].textContent.includes(name)) {
+          return fonts[i + 1];
+        }
+      }
+    }
+
+    function isBoss(tds) {
       let boss;
 
       for (let td of tds) {
         boss = td.textContent;
+
         if (boss) {
           if (bosses.includes(boss)) {
             return true;
@@ -638,10 +724,7 @@ Notes on coordinates
       return false;
     }
 
-    function isSlowed() {
-      const td1 = frame.querySelector('td');
-      const tds = td1.querySelectorAll('td');
-
+    function isSlowed(tds) {
       for (let td of tds) {
         if (td.textContent.includes('Slowed')) {
           return true;
@@ -651,11 +734,9 @@ Notes on coordinates
       return false;
     }
 
-    function isLink(phrase) {
-      const links = frame.querySelectorAll('a');
-
+    function isLink(phrase, links) {
       for (let link of links) {
-        if (link.innerHTML.search(phrase) != -1) {
+        if (link.innerHTML.includes(phrase)) {
           return true;
         }
       }
@@ -663,16 +744,15 @@ Notes on coordinates
       return false;
     }
 
-    function isCasted(magic) {
-      const tds = frame.querySelectorAll('td');
-      const msg = /Rohane/;
+    function isCasted(magic, tds) {
+      const keyWord = 'Rohane';
 
       for (let i = tds.length - 1; i > 0; i--) {
-        if (tds[i].textContent.search(magic) != -1) {
+        if (tds[i].textContent.includes(magic)) {
           return true;
         }
 
-        if (tds[i].textContent.search(msg) != -1) {
+        if (tds[i].textContent.includes(keyWord)) {
           return false;
         }
       }
@@ -694,19 +774,19 @@ Notes on coordinates
     function actorsHealed() {
       let healed = 0;
       let allies = false;
+      let imgSrc;
 
       for (let img of images) {
-        if (img.src.split('/').at(-1) == 'donothing.gif') {
+        imgSrc = img.src.split('/').at(-1);
+
+        if (!allies && imgSrc.includes('donothing')) {
           allies = true;
           continue;
         }
 
         if (allies) {
-          if (img.src.split('/').at(-1) == 'exp_green.gif') {
-            //45 is full health
-            if (img.width >= 30) {
-              healed += 1;
-            }
+          if (imgSrc.includes('exp_') && img.width >= 30) {
+            healed += 1;
           }
         }
       }
