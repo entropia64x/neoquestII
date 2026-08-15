@@ -9,7 +9,7 @@ The script will autoplay until you reach Tebor (trader) at level 10.
 The first paths are included for nostalgia.
 
 ## 1. Meridell
-```
+
 From 1 unit diagonally from Mother to 1 unit below the dark cave entrance (inside)
 33333333357111111117111111
 Return for training and rest.
@@ -51,9 +51,9 @@ Return.
 From 1 unit right of Tebor (trader) to somewhere near Zombom. Fight at level 13.
 4477777777777777748884488222222262228888844444777777444448888888884488828884822844477777771111517744362222222222222284453555511111222
 
-From 1 unit right of the Underground Cave to 1 unit diagonally left of the Mysterious Tower.
+From 1 unit diagonally right below of the Underground Cave to 1 unit diagonally left of the Mysterious Tower.
 Start at level 11.
-8822222226222888884444477777744444888888888448882
+882222226222888884444477777744444888888888448882
 Return.
 5155335555555553333366666633333555551117111111155
 
@@ -65,12 +65,12 @@ Return.
 =============================================================}
 
 From 2 units above the portal orb to Tebor (cheaper potions) in normal mode.
-221551555535555355333336666663333355555111171115551135553666666666662666333
+2215155335555555553333366666633333555551117111111155335553666666666662666333
 
 From Tebor to Mipsy.
 4488882222222222222226663
 
-Go right to meet Sildarim. **Buy only weapons and armor.**
+Go right to meet Sildarim (trader). **Buy at least 1 resurrection potion.**
 444444444
 
 ### Training
@@ -79,7 +79,7 @@ From 1 unit left of Sildairm (trader) to the far left of Festering Swamp.
 Train until level 14.
 366664444444444444444888884
 Return to Sildairm.
-555553333333333333333174774
+555553333333333333333577744
 ========}
 
 ### Options
@@ -165,12 +165,10 @@ The path is split into sections for training at each level:
 **Complete path:**
 111115533356228866334744477711177744477715515333666222366333551111115848888884444447446662666663332223
 =======}
-```
 
 
 
 ## 2. Terror Mountain
-```
 
 ### Options
 ====================={
@@ -257,12 +255,12 @@ Ignore the Snowager (shorter path).
 From Terror Mountain peak to somewhere near Scuzzy (start 1 unit left of the cave icon).
 Fight at level 30.
 6333633336366636226662288884444444444777
-```
+
 
 
 
 ## 3. Lost Desert
-```
+
 From the start point to Phebiya.
 3355555111156
 
@@ -353,12 +351,12 @@ From Zakharukh's Pyramid, level 1, to somewhere near Anubits. Fight at level 41.
 33333511111111153333333333663333333553333333333622222222288444488444444774884488848244488444488226633366223333333333333333333333333333311111111557771
 **Levels 2 and 3**
 222884444444471533333551111178828847411111111
-```
+
 
 
 
 ## 4. Haunted Woods
-```
+
 From the start point to Hunsev (weapon trader).
 2222222266663333668
 
@@ -384,28 +382,33 @@ Talk to Spider Grundo.
 From one unit above and northwest of Spider Grundo to Balthazar. **Talk to him.**
 63363333333333333633333622226662226662222222888226666663333333333335553
 
-From 1 unit right of Balthazar to somewhere near the Brain Tree.
+From 1 unit right of Balthazar to Augur Faunt (trader) and the Brain Tree.
 Train until level 47.
 5171111111111177747533336633555117884444447777753366333553336222284862662844444717488847115117111111533663336263511174444411155
 
-From 1 unit right of Augur Faunt to 1 unit right of where the fight with the faeries will begin.
-633336622222222222222222882222226265
+Trade with Augur Faunt and talk to the Brain Tree.
+**Don't sell all the healing potions!**
 
-From 1 unit right of the Faeries (1 unit down from a corner tree) to Nox Fortress.
+From 1 unit right of Augur Faunt to the fight with the faeries.
+6333366222222222222222228822222262653
+
+From 1 unit right of the Faeries (1 unit down from a corner tree) to Nox Fortress. Normal mode.
 35555555555555555553333333333333333336666666333555333666622288844747
 
 From Nox Fortress, level 1, to somewhere near Hubrid Nox. **WOOHOO!**
 1115333511117845562222222287455622651111744755744444442226336663366447557753351114482222633628444444777115512263622226555111717748888226715333335
 
-From 1 unit below Nox Fortress to somewhere near Esophagor.
+Talk to Hubrid Nox.
+
+From 1 unit diagonally right of Hubrid Nox to somewhere near Esophagor.
 Fight at level 50.
-8826666666628888884444444444488478848888448488884
-```
+3518826666666628888884444444444488478848888448488884
+
 
 
 
 ## Faerieland
-```
+
 From the Faerieland start point to Gustano (potion trader in Northern Watchtower).
 2222288882888888444448888888222228888886
 
@@ -417,19 +420,18 @@ From 1 unit above Calam (trader) to somewhere near Fallen Angel.
 Fight at level 52.
 666222626262622666222288228222266633662888888447744488
 
-Go right to find Vilaria.
+Go right to find Vilaria. **Talk to her.**
+4444844444
 
 From 1 unit left of Vilaria to Cumulonimbus.
 22222266282826222888822822222866333366222222888266222622284444447488444777448227477744448888
 
 From inside Cumulonimbus to somewhere near Devilpuss.
 Normal mode, but fight at level 53.
-4888844447111771174715333333333511111111117444444444444444444444444444482226622222633333366222266363622226633336222884444822228444444444444444444444444471111111153333511111117744
+488884444711177117471533333333351111111111744444444444444444444444444448222662222263333336622226636362222663333622288444482222844444444444444444444444447111111115333351111111774444
 
-Go right to exit.
-
-From 1 unit right of the top-right of Cumulonimbus to Caereli (trader inside Cirrus Village).
-477744447771555553535711777771144488263
+From the center of four corners to Caereli (trader inside Cirrus Village).
+4444477744447771555553535711777771144488263
 
 From Caereli to Mekava (trader). Go down and left, or
 48222263
@@ -442,7 +444,7 @@ From here on, use normal mode.
 From 1 unit below Lusina to somewhere near Faerie Thief battle #1.
 7117777744444471174447711115511111744825362633622288888666362244444448226333333333353
 
-From 1 unit northwest of the blue pillar to 1 unit below Lusina.
+From 1 unit northwest of the blue pillar to 1 unit below Lusina. Talk to her.
 4484444444444711551535775555511174471748453362222288222222333336226333336663362226
 
 From 1 unit below Lusina to Faerie Thief battle #2.
@@ -463,24 +465,25 @@ From 1 unit below Stenvela to 1 unit below Vitrini (by entropia64x).
 From 1 unit below Vitrini to the Pant Devil (right side).
 44444448882228444475335744444471115626335156222265351533688634477
 
-From 1 unit above the downstairs icon to 1 unit below Vitrini (right side).
-2755744828487111178284471782226333333684486333355511153333333
+From the center of four pilars to 1 unit below Vitrini (right side).
+6666755744828487111178284471782226333333684486333355511153333333
 
 From 1 unit below Vitrini to the Pant Devil (left side).
 3333333333336662226333357447533333351117828447178224471744822662843355
 
-From 1 unit above the downstairs icon to 1 unit below Vitrini (left side).
-251771153362633315626335156222844444486336844447111777444444444444
+From the center of four pilars to 1 unit below Vitrini (left side).
+888851771153362633315626335156222844444486336844447111777444444444444
 
-From 1 unit below Vitrini to somewhere near Terask battle #1.
+From 1 unit below Vitrini to Kinig Terask battle #1.
 *(Get the key pieced together by Vitrini!)*
-44444448882228884444822222222226663333333333622222222228717444444444486334822636217884751533511533688226336211117
+444444488822288844448222222222266633333333336222222222287174444444444863348226362178847515335115336882263362111177
 
 Go up to use the portal.
+71111111
 
 Two units left of a gate to Lyra (normal mode).
 71111111111744444444447771111111111533335551115553333333333333333333666222666333362222222222888444444444482222222222263515711571533362222666226535511111111144863622284444822228444444451111111551533622222222263336
 
 From 1 unit right of Lyra to King Terask (the final battle). *(Thanks, hey3423.)*
-51111111111152888888
-```
+5111111111115288888888
+
