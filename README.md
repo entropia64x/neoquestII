@@ -23,19 +23,27 @@ Return for training and rest.
  
 Start at level 8.5 and hunt.
 From 1 unit below the dark cave exit (inside) to the first gray railway.
+```
 88288228228888444444744447777777777177744848822666366626622222222662
+```
 
 Start at level 10.
-From the first gray railway to somewhere near Miner Foreman George.
-6222266333333333336333336666662
 
-Start at level 10. Fight George,
-take the portal, and finish with Tebor (trader) inside White River City.
+From the first gray railway to somewhere near Miner Foreman George.
+```
+6222266333333333336333336666662
+```
+
+Start at level 10. Fight George, take the portal, 
+and finish with Tebor (trader) inside White River City.
+```
 62222663333333333363333366666622222844444444444444484444888888884444844444482666333
+```
 
 From 1 unit below the dark cave entrance to Tebor (trader) inside White River City.
+```
 844444444444444484444888888884444844444482666333
-
+```
 
 ## HERE YOU START TO PLAY
 
@@ -46,137 +54,235 @@ From 1 unit below the dark cave entrance to Tebor (trader) inside White River Ci
 From 1 unit right of Tebor (trader) to 1 unit right and down from the underground cave entrance (inside).
 
 Train until level 11.
+```
 447777777777777774888442
+```
 
 Return.
+```
 535553666666666662666333
+```
 
 From 1 unit right of Tebor (trader) to 1 unit diagonally left of the Mysterious Tower.
 
 Train until level 13.
+```
 447777777777777774888448822222226222888884444477777744444888888888448882
+```
 
 Return.
+```
 5155335555555553333366666633333555551117111111155335553666666666662666333
+```
 
 From 1 unit right of Tebor (trader) to somewhere near Zombom. Fight at level 13.
+```
 4477777777777777748884488222222262228888844444777777444448888888884488828884822844477777771111517744362222222222222284453555511111222
+```
 
 From 1 unit diagonally right below of the Underground Cave to 1 unit diagonally left of the Mysterious Tower.
+
 Start at level 11.
+```
 882222226222888884444477777744444888888888448882
+```
+
 Return.
+```
 5155335555555553333366666633333555551117111111155
+```
 
 From 1 unit diagonally left of the Mysterious Tower to somewhere near Zombom.
 
 Start at level 13.
+```
 8884822844477777771111517744362222222222222284453555511111222
+```
 
 Return.
+```
 111122228888883511111111111111744366282222666666633351153553
+```
 =============================================================}
 
+
 From 2 units above the portal orb to Tebor (cheaper potions) in normal mode.
+```
 2215155335555555553333366666633333555551117111111155335553666666666662666333
+```
 
 From Tebor to Mipsy.
+```
 4488882222222222222226663
+```
 
 Go right to meet Sildarim (trader). **Buy at least 1 resurrection potion.**
+```
 444444444
+```
+
 
 ### Training
+
 ========{
+
 From 1 unit left of Sildairm (trader) to the far left of Festering Swamp.
+
 Train until level 14.
+```
 366664444444444444444888884
+```
+
 Return to Sildairm.
+```
 555553333333333333333577744
+```
 ========}
 
 ### Options
+
 Start at level 14.
+
 ========{
+
 1) From the far left of (inside) Festering Swamp to Potraddo. *(He gives the password.)*
+```
 3333666666663333333336666666666666666666666666333331111111555511111115511111177717711111111774444715353333356333333333366222
+```
 
 2) From 1 unit left of Sildairm (trader) to Potraddo. *(He gives the password.)*
+```
 36666444444444444444482222266666663333333336666666666666666666666666333331111111555511111115511111177717711111111774444715353333356333333333366222
+```
 ========}
 
+
 From 1 unit above Potraddo to Zapka (trader).
+```
 11177444444444478444448482633336622222222662666222222844717
+```
 
 Go right to trade with Pipka, then go down to trade with Yeccki.
 
 From 1 unit diagonally left of Yeccki (potions trader) to the Ghost of Phorofor.
+```
 6666222222222444447777777777744488822266666666666638888
+```
 
 From where you talked to the Ghost to somewhere near Giant Sand Grundo.
+
 **Make sure you open the gate by talking to the ghost-like figure.**
+
 Start at level 15.
+
 ### Options
+
 ========{
+
 To Undead Merchant.
+```
 888888888882844488888
+```
 
 From Undead Merchant to Sand Grundo.
+```
 4488828888222222228844444444
+```
 
 Complete path:
+```
 8888888888828444888884488828888222222228844444444
+```
 ========}
 
+
 From 1 unit diagonally from the teleport orb to outside the tower on Dead Hills.
+
 Start at level 16.
+```
 222222222222877444477711778284482222222633336633333511511115626511111111744444777
+```
 
 From 1 unit above the tower on Dead Hills to Seaside.
+
 Start at level 17.5.
+```
 71717111111117777777447444448888888884888444444
+```
 
 From 1 unit left of Seaside to Uthare. **Do not buy anything; just talk to him.**
 Start at level 18.
+```
 4447771
+```
 
 From 1 unit below Uthare to 1 unit left of Uthyni. Talk to him and choose:
 > "What do you know about the troubles at the castle?".
 > "Yes?"
 > "I'm sorry to hear that. I'll see what I can do about him."
+```
 28444444444711174444444
+```
 
 From 1 unit left of Uthyni to Uthare (20% discount).
+```
 33333336222633333333351
+```
 
 From Uthare to Pathannis (armor trader).
+```
 284488882
+```
 
 From Pathannis to near First Ramptor.
+```
 155533333333336666666666666666666666666622266363333333335555555551
+```
 
 From 1 unit down from Ramtor's red chair to Ramtor's tower.
+```
 2288888888884444444463333333333333366633333333333335555555555535335
+```
 
 ### If potions are needed
+
 From Ramtor's Tower to Uthare (potion trader) in normal mode.
+```
 8448488888888888444444444444477744444444444444774771117777777777777777777777777744447711
+```
 
 **Inside Ramtor's Tower:** from the first location to somewhere near Ramtor.
+
 Start at level 19 and finish at level 20.
+
 The path is split into sections for training at each level:
+
 ======={
+
 **Level 1**
+```
 11111553335622886633
+```
+
 **Level 2**
+```
 4744477711177744477715515333666222366333551111115
+```
+
 **Level 3**
+```
 84888888444444744
+```
+
 **Level 4**
+```
 6662666663332223
+```
 
 **Complete path:**
+```
 111115533356228866334744477711177744477715515333666222366333551111115848888884444447446662666663332223
+```
 =======}
 
 
