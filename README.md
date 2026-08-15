@@ -287,93 +287,177 @@ The path is split into sections for training at each level:
 
 
 
+
 ## 2. Terror Mountain
 
 ### Options
 ====================={
 Beginning to Leximp (Normal mode).
+```
 4487444477474444448848828888228888
+```
+
 
 From 1 unit left of Leximp's old location to 1 unit diagonally below Jarasth (trader) inside Chia Oscuro (town).
+```
 555555551555115333363633633333333333333551
+```
+
 
 Complete path:
+```
 4487444477474444448848828888228888555555551555115333363633633333333333333551
+```
 =====================}
 
+
+
 Go left and down to meet Ullistl and create a checkpoint.
+```
 66666263
+```
+
 
 Train until level 24.
+
+
 ### Options
+
 ============={
+
 From 1 unit right of Ullistl to Caves of Terror.
+```
 471533333387444477474444441774474444444444447744444477444444444444444444444444444444477777777777771
+```
+
 
 **For training:**
+
 From 1 unit right of Ullistl and back to Jarasth (potion trader).
+```
 47153333338744447747444444177447444444444444774444447744444444443333333333663333336633333333333363366233333363663333333333333551
+```
+
 
 From 1 unit diagonally below Jarasth to Caves of Terror.
+```
 284444444444444477474444441774474444444444447744444477444444444444444444444444444444477777777777771
+```
 =============}
 
+
 From 1 unit below the Caves of Terror icon to 1 unit above Talinia.
+
 Enter at level 24.
+```
 115555333366636336333335553535333557777744444474444477747755533363355533535777115551774444744444484474711111177717111188
+```
+
 
 Go right to trade with Borhal.
+```
 444844
+```
+
 
 From 1 unit left of Borhal to somewhere near boss Kolvars (hunting).
+
 Fight at level 26.
+```
 33335553355551155555555555555335333355333333555636333333355155366633336633363511777155366366626
+```
+
 
 From 1 unit diagonally left of the tree near Kolvars to Jualie. Talk to Jualie.
+```
 666666666222268111111111177744444471155
+```
+
 
 From 1 unit diagonally below Jualie to 1 unit left of Niacha. Talk to her.
+```
 88226333333666222222222237747744
+```
+
 
 From 1 unit left of where Niacha used to be to 1 unit below Jualie and Niacha. Talk to them.
+```
 666661111111111777444444711535
+```
+
 
 From Jualie to Utolok (armor trader).
+```
 847115333333511111111111744
+```
+
 
 From Utolok to Arisso (weapon trader), then from Arisso to Vanne (potion trader).
+```
 33511744
+```
+
 
 From Vanne to Allden of the Camp. Rest there.
+```
 335511116822282222288888888888844444444444444444744484444444488447774777747777717778
+```
+
 
 From Allden to Level 2 of Lost Caves:
+
 1 unit below the stairs going down (we are going up).
+
 You should be near level 28.
+```
 535551115555153355553333355115355355117155553333533333333553662222266355111
+```
+
 
 Level 2: 1 unit below the stairs going down (we are going up).
+```
 282844444711111115115333351744744
+```
+
 
 Level 3: 1 unit above the stairs.
+```
 1111355555
+```
+
 
 Level 4: 1 unit below the stairs.
+
 Options: **Normal mode**, because healing items should be low.
+
 ===================={
+
+
 Talk to the Snowager.
+```
 22266222228826666222
+```
 
 Continue.
+```
 1115555555333333666666335555555355551111117171155333333333333333
+```
+
 
 Ignore the Snowager (shorter path).
+```
 222666222888266665555555333333666666335555555355551111117171155333333333333333
+```
 ====================}
 
+
+
 From Terror Mountain peak to somewhere near Scuzzy (start 1 unit left of the cave icon).
+
 Fight at level 30.
+```
 6333633336366636226662288884444444444777
+```
 
 
 
