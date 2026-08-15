@@ -2,20 +2,24 @@
 *(Almost everything here was originally done by NQ2guy.)*
 
 Before using the script, install **ViolentMonkey** or **TamperMonkey**, then install the script.
+
 Start the autoplayer **1 unit diagonally left of Mother**, not above Mother, as the game does
 when it starts.
 
 The script will autoplay until you reach Tebor (trader) at level 10.
+
 The first paths are included for nostalgia.
 
 ## 1. Meridell
 
 From 1 unit diagonally from Mother to 1 unit below the dark cave entrance (inside)
+```
 33333333357111111117111111
-
+```
 Return for training and rest.
+```
 12222262222222268444444444
-
+```
  
 Start at level 8.5 and hunt.
 From 1 unit below the dark cave exit (inside) to the first gray railway.
