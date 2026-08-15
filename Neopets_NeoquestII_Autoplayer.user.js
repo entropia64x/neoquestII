@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Neopets: NeoQuest II: Autoplayer
 // @namespace    https://github.com/entropia64x/neoquestII/
-// @version      3.11
+// @version      3.12
 // @description  Remote control and trainer for NeoQuest II
 // @author       entropia64x
 // @match        https://www.neopets.com/games/nq2/nq2*
@@ -33,15 +33,24 @@ Notes on coordinates
 (function () {
   'use strict';
   //Change just these 3 variables
-  let path = '75122'; //The path to follow. Works at Level 10.
+  let path = ''; //The path to follow. Works at Level 10.
   let training = 0; //1 = true, 0 = false. Works at Level 10.
   const stop = 0; //1 = true, 0 = false. Works any time.
 
-  const header = document.querySelector('.contentModuleHeader');
+
+  const maintenance = document.querySelector('#maintenance-container');
+  const content = document.querySelector('.contentModule');
   const randomEvent = document.querySelector('.randomEvent');
 
-  if (!header || randomEvent) {
-    location.href = 'nq2.phtml';
+  function go(url = '') {
+    url = `nq2.phtml${url}`;
+    location.href = url;
+  }
+
+  if (maintenance) {
+    return;
+  } else if (!content || randomEvent) {
+    go();
   } else {
     const frame = document.querySelector('.frame');
     const images = frame.querySelectorAll('img');
@@ -103,9 +112,9 @@ Notes on coordinates
       'an Earth Faerie',
       'Hubrid Nox',
       'the Esophagor',
-      'Fallen Angel',
+      'The Fallen Angel',
       'Devilpuss',
-      'Faerie Thief',
+      'the Faerie Thief',
       'Pant Devil',
       'King Terask',
     ];
@@ -123,17 +132,42 @@ Notes on coordinates
     const POTIONS = {
       heal: {
         regexPoints: /heal (\d+)/g,
-        regexCode: /(300\d{2})/g,
+        codes: {
+          15: 30011,
+          25: 30012,
+          35: 30013,
+          50: 30014,
+          60: 30021,
+          70: 30022,
+          80: 30023,
+          90: 30031,
+          100: 30032,
+          110: 30033,
+          120: 30041,
+          130: 30042,
+          140: 30043,
+          150: 30051,
+          160: 30052,
+          170: 30053,
+        },
       },
 
       dmg: {
         regexPoints: /dmg (\d+)/g,
-        regexCode: /(301\d{2})/g,
-      },
-
-      slow: {
-        regexPoints: /slow (\d+)/g,
-        regexCode: /(303\d{2})/g,
+        codes: {
+          15: 30100,
+          25: 30101,
+          35: 30102,
+          50: 30103,
+          65: 30104,
+          80: 30105,
+          95: 30106,
+          110: 30107,
+          125: 30108,
+          140: 30109,
+          155: 30110,
+          170: 30111,
+        }
       },
     };
 
@@ -146,8 +180,8 @@ Notes on coordinates
       }
     }
 
-    function go(url) {
-      location.href = url;
+    function goJS(submit) {
+      location.href = `javascript:${submit}`;
     }
 
     /*=============================  ICON CASES  =============================*/
@@ -158,7 +192,7 @@ Notes on coordinates
       //Open Inventory
       if (inv && GM_getValue('hasHealItems', true)) {
         GM_setValue('inv', true);
-        go('nq2.phtml?act=inv');
+        go('?act=inv');
         return;
       }
 
@@ -170,11 +204,11 @@ Notes on coordinates
       if (oldLevel < level && level < 40) {
         GM_setValue('oldRohaneLevel', level);
         let skopt = getSkill(level);
-        go(`nq2.phtml?act=skills&buy_char=1&buy_char=1&confirm=1&skopt_${skopt}=1`);
+        go(`?act=skills&buy_char=1&buy_char=1&confirm=1&skopt_${skopt}=1`);
       }
       //Hunting mode
       else if (isHunting(level)) {
-        go('nq2.phtml?act=travel&mode=2');
+        go('?act=travel&mode=2');
       }
       //Decide path
       else {
@@ -192,12 +226,12 @@ Notes on coordinates
         healBeforeGo();
       } else {
         // Return to map
-        go('nq2.phtml?finish=1');
+        go('?finish=1');
       }
     }
 
     function begin() {
-      go('nq2.phtml?start=1');
+      go('?start=1');
     }
 
     function battle() {
@@ -215,16 +249,26 @@ Notes on coordinates
           [ACTOR.VELM]: velmAction,
         };
 
-        actorsActions[nxactor](nxactor, getTarget());
+        let action = ACTION.ATTACK;
+        let id = false;
+
+        [action, id] = actorsActions[nxactor](action, id);
+
+
+        let submit = `settarget(${getTarget()}); `;
+        submit += `setaction(${action}); `;
+        submit += `setitem(${id}); `;
+        submit += `setch(ch${nxactor}); document.ff.submit();`;
+        goJS(submit);
       }
     }
 
     function next() {
-      go(`nq2.phtml?&fact=${ACTION.NEXT}`);
+      goJS(`setaction(${ACTION.NEXT}); document.ff.submit();`)
     }
 
     function end() {
-      go(`nq2.phtml?&fact=${ACTION.END}`);
+      goJS(`setaction(${ACTION.END}); document.ff.submit();`)
     }
 
     /*==============================  MAP ICON  ==============================*/
@@ -345,28 +389,28 @@ Notes on coordinates
     }
 
     function decidePath(level, pathIndex) {
-      //Stop
       if (stop) {
         GM_setValue('path', '');
         restartPathIndex();
-      }
-      //Move
-      else if (pathIndex < GM_getValue('path').length) {
+      } else if (pathIndex < GM_getValue('path').length) {
         const direction = nextMove(pathIndex);
         GM_setValue('pathIndex', pathIndex + 1);
-        go(`nq2.phtml?act=move&dir=${direction}`);
-      }
-      //Training: move left
-      else if (training || (level == 8 && !GM_getValue('first')) || level == 9) {
+        goJS(`dosub(${direction})`) //Move
+      } else if (
+        training ||
+        (level == 8 && !GM_getValue('first')) ||
+        level == 9
+      ) {
         GM_setValue('pathIndex', 1);
-        go('nq2.phtml?act=move&dir=3');
+        goJS(3) //Move left
       } else {
         restartPathIndex();
+
         //Rest with mother
         if (level < 8) {
-          go('nq2.phtml?act=talk&targ=10201&say=rest');
+          go('?act=talk&targ=10201&say=rest');
         }
-        //Finish
+        //Stop
         else if (
           (level > 10 || (level == 10 && !GM_getValue('first'))) &&
           GM_getValue('path', true)
@@ -393,18 +437,18 @@ Notes on coordinates
 
       if (!useid) {
         GM_setValue('hasHealItems', false);
-        go('nq2.phtml');
+        go();
       } else {
         GM_setValue('lowest', lowest);
         let [char, hp] = whoNeedsCure(lowest, /Rohane/);
 
         if (!char) {
           GM_setValue('inv', false);
-          go('nq2.phtml');
+          go();
         } else if (!hp) {
           resurrect();
         } else {
-          go(`nq2.phtml?act=inv&iact=use&targ_item=${useid}&targ_char=${char}`);
+          go(`?act=inv&iact=use&targ_item=${useid}&targ_char=${char}`);
         }
       }
     }
@@ -415,10 +459,10 @@ Notes on coordinates
       if (!itemTable) {
         return [false, false];
       }
+
       const potion = POTIONS[type];
 
       let allPoints = itemTable.textContent.match(potion.regexPoints);
-      let allCodes = [...new Set(itemTable.innerHTML.match(potion.regexCode))];
       let points = 0;
       let best = false;
 
@@ -426,7 +470,7 @@ Notes on coordinates
         points = +allPoints[i].match(/\d+/);
 
         if (dif > points || !best) {
-          best = allCodes[i].match(/\d+/)[0];
+          best = potion.codes[points];
 
           if (!dif) break;
         }
@@ -467,19 +511,19 @@ Notes on coordinates
       let hp$full = font.textContent.match(/(\d+)\/(\d+)/);
       let hp = +hp$full[1];
       let full = +hp$full[2];
-      let useid = lookForBestPotion(full - hp, 'heal')[0];
+      let id = lookForBestPotion(full - hp, 'heal')[0];
 
-      if (!useid) {
+      if (!id) {
         let msg = 'Stopped due to lack of potions.\n';
         msg += `Path=${GM_getValue('path')}, pathIndex=${GM_getValue('pathIndex')}`;
         alert(msg);
         GM_setValue('hasHealItems', false);
         GM_setValue('pathIndex', 0);
         GM_setValue('path', '');
-        go(`q2.phtml?&fact=${ACTION.FLEE}`);
+        go(`?&fact=${ACTION.FLEE}`);
       } else {
         GM_setValue('hasHealItems', true);
-        go(`nq2.phtml?&fact=${ACTION.USE_ITEM}&use_id=${useid}&nxactor=${nxactor}`);
+        go(`?&fact=${ACTION.USE_ITEM}&use_id=${id}&nxactor=${nxactor}`);
       }
     }
 
@@ -496,20 +540,22 @@ Notes on coordinates
       return target;
     }
 
-    function rohaneAction(nxactor, target) {
+    function rohaneAction(action, id) {
       if (isBoss()) {
         if (!isSlowed()) {
-          if (usePotionIfAvailable('slow', nxactor, target)) {
-            return;
-          }
-        } else {
-          if (usePotionIfAvailable('dmg', nxactor, target)) {
-            return;
-          }
+          id = lookForSlowPotion();
+        }
+
+        if (!id) {
+          id = lookForBestPotion(0, 'dmg')[0];
+        }
+
+        if (id) {
+          action = ACTION.USE_ITEM;
         }
       }
 
-      go(`nq2.phtml?&fact=${ACTION.ATTACK}&target=${target}&nxactor=${nxactor}`);
+      return [action, id];
     }
 
     function isBoss() {
@@ -544,34 +590,35 @@ Notes on coordinates
       return false;
     }
 
-    function usePotionIfAvailable(type, nxactor, target) {
-      const id = lookForBestPotion(0, type)[0];
+    function lookForSlowPotion() {
+      const itemTable = getTable('slow');
 
-      if (!id) {
+      if (!itemTable) {
         return false;
       }
 
-      go(`nq2.phtml?&fact=${ACTION.USE_ITEM}&use_id=${id}&target=${target}&nxactor=${nxactor}`);
+      const slowRegex = /(303\d{2})/g;
+      let allCodes = [...new Set(itemTable.innerHTML.match(slowRegex))];
 
-      return true;
+      return allCodes[allCodes.length -1];
     }
 
-    function mipsyAction(nxactor, target) {
+    function mipsyAction(action, id) {
+      action = ACTION.MIPSY_DIRECT_DAMAGE;
+
       if (isLink(/Group Haste/) && !isCasted(/Hasted/)) {
-        go(`nq2.phtml?&fact=${ACTION.MIPSY_GROUP_HASTE}&nxactor=${nxactor}`);
-        return;
+        action = ACTION.MIPSY_GROUP_HASTE;
+      } else if (isLink(/Damage Shields/) && !isCasted(/Damage Shields/)) {
+        action = ACTION.MIPSY_DAMAGE_SHIELDS;
+      } else if (isBoss() && !isSlowed()) {
+        id = lookForSlowPotion();
+
+        if (id) {
+          action = ACTION.USE_ITEM;
+        }
       }
 
-      if (isLink(/Damage Shields/) && !isCasted(/Damage Shields/)) {
-        go(`nq2.phtml?&fact=${ACTION.MIPSY_DAMAGE_SHIELDS}&nxactor=${nxactor}`);
-        return;
-      }
-
-      if (isBoss() && !isSlowed() && usePotionIfAvailable('slow', nxactor, target)) {
-        return;
-      }
-
-      go(`nq2.phtml?&fact=${ACTION.MIPSY_DIRECT_DAMAGE}&target=${target}&nxactor=${nxactor}`);
+      return [action, id];
     }
 
     function isLink(phrase) {
@@ -601,31 +648,30 @@ Notes on coordinates
       }
     }
 
-    function taliniaAction(nxactor, target) {
-      if (isBoss() && !isSlowed() && usePotionIfAvailable('slow', nxactor, target)) {
-        return;
+    function taliniaAction(action, id) {
+      if (isBoss() && !isSlowed()) {
+        id = lookForSlowPotion();
+
+        if (id) {
+          action = ACTION.USE_ITEM;
+        }
+      } else if (isLink(/Multiple Targets/)) {
+        action = ACTION.TALINIA_MULTI;
       }
 
-      if (isLink(/Multiple Targets/)) {
-        go(`nq2.phtml?&fact=${ACTION.TALINIA_MULTI}&nxactor=${nxactor}`);
-        return;
-      }
-
-      go(`nq2.phtml?&fact=${ACTION.ATTACK}&target=${target}&nxactor=${nxactor}`);
+      return [action, id]
     }
 
-    function velmAction(nxactor, target) {
+    function velmAction(action, id) {
       if (actorsHealed() < 4) {
-        go(`nq2.phtml?&fact=${ACTION.VELM_GROUP_HEALING}&nxactor=${nxactor}`);
-        return;
+        action = ACTION.VELM_GROUP_HEALING;
+      } else if (!isCasted(/Def/)) {
+        action = ACTION.VELM_GROUP_SHIELDING;
+      } else {
+        [action, id] = rohaneAction(action, id);
       }
 
-      if (!isCasted(/Def/)) {
-        go(`nq2.phtml?&fact=${ACTION.VELM_GROUP_SHIELDING}&nxactor=${nxactor}`);
-        return;
-      }
-
-      rohaneAction(nxactor, target);
+      return [action, id];
     }
 
     function actorsHealed() {
