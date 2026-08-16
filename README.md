@@ -380,7 +380,7 @@ From 1 unit diagonally left of the tree near Kolvars to Jualie. Talk to Jualie.
 666666666222268111111111177744444471155
 ```
 
-From 1 unit diagonally below Jualie to 1 unit left of Niacha. Talk to her.
+From 1 unit diagonally below Jualie to 1 unit left of Niacha. Talk to him.
 ```
 88226333333666222222222237747744
 ```
