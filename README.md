@@ -290,7 +290,7 @@ The path is split into sections for training at each level:
 
 **Level 4**
 ```
-6662666663332223
+66626666633322233
 ```
 
 **Complete path:**
