@@ -16,12 +16,14 @@ From 1 unit diagonally from Mother to 1 unit below the dark cave entrance (insid
 ```
 33333333357111111117111111
 ```
+
 Return for training and rest.
 ```
 12222262222222268444444444
 ```
  
 Start at level 8.5 and hunt.
+
 From 1 unit below the dark cave exit (inside) to the first gray railway.
 ```
 88288228228888444444744447777777777177744848822666366626622222222662
@@ -34,7 +36,7 @@ From the first gray railway to somewhere near Miner Foreman George.
 6222266333333333336333336666662
 ```
 
-Start at level 10. Fight George, take the portal, 
+Start at level 10. Fight George, take the portal,
 and finish with Tebor (trader) inside White River City.
 ```
 62222663333333333363333366666622222844444444444444484444888888884444844444482666333
@@ -51,7 +53,7 @@ From 1 unit below the dark cave entrance to Tebor (trader) inside White River Ci
 
 ============================================================{
 
-From 1 unit right of Tebor (trader) to 1 unit right and down from the underground cave entrance (inside).
+**1) From 1 unit right of Tebor (trader) to 1 unit right and down from the underground cave entrance (inside).**
 
 Train until level 11.
 ```
@@ -63,7 +65,7 @@ Return.
 535553666666666662666333
 ```
 
-From 1 unit right of Tebor (trader) to 1 unit diagonally left of the Mysterious Tower.
+**2) From 1 unit right of Tebor (trader) to 1 unit diagonally left of the Mysterious Tower.**
 
 Train until level 13.
 ```
@@ -75,12 +77,12 @@ Return.
 5155335555555553333366666633333555551117111111155335553666666666662666333
 ```
 
-From 1 unit right of Tebor (trader) to somewhere near Zombom. Fight at level 13.
+**3) Complete path: From 1 unit right of Tebor (trader) to somewhere near Zombom. Fight at level 13.**
 ```
 4477777777777777748884488222222262228888844444777777444448888888884488828884822844477777771111517744362222222222222284453555511111222
 ```
 
-From 1 unit diagonally right below of the Underground Cave to 1 unit diagonally left of the Mysterious Tower.
+**4) From 1 unit diagonally right below of the Underground Cave to 1 unit diagonally left of the Mysterious Tower.**
 
 Start at level 11.
 ```
@@ -92,7 +94,7 @@ Return.
 5155335555555553333366666633333555551117111111155
 ```
 
-From 1 unit diagonally left of the Mysterious Tower to somewhere near Zombom.
+**5) From 1 unit diagonally left of the Mysterious Tower to somewhere near Zombom.**
 
 Start at level 13.
 ```
@@ -126,14 +128,14 @@ Go right to meet Sildarim (trader). **Buy at least 1 resurrection potion.**
 
 ========{
 
-From 1 unit left of Sildairm (trader) to the far left of Festering Swamp.
+**From 1 unit left of Sildairm (trader) to the far left of Festering Swamp.**
 
 Train until level 14.
 ```
 366664444444444444444888884
 ```
 
-Return to Sildairm.
+Return.
 ```
 555553333333333333333577744
 ```
@@ -145,12 +147,12 @@ Start at level 14.
 
 ========{
 
-1) From the far left of (inside) Festering Swamp to Potraddo. *(He gives the password.)*
+**1) From the far left of (inside) Festering Swamp to Potraddo. *(He gives the password.)***
 ```
 3333666666663333333336666666666666666666666666333331111111555511111115511111177717711111111774444715353333356333333333366222
 ```
 
-2) From 1 unit left of Sildairm (trader) to Potraddo. *(He gives the password.)*
+**2) From 1 unit left of Sildairm (trader) to Potraddo. *(He gives the password.)***
 ```
 36666444444444444444482222266666663333333336666666666666666666666666333331111111555511111115511111177717711111111774444715353333356333333333366222
 ```
@@ -187,17 +189,17 @@ Start at level 15.
 
 ========{
 
-To Undead Merchant.
+**1) To Undead Merchant.**
 ```
 888888888882844488888
 ```
 
-From Undead Merchant to Sand Grundo.
+**2) From Undead Merchant to Sand Grundo.**
 ```
 4488828888222222228844444444
 ```
 
-Complete path:
+**Complete path:**
 ```
 8888888888828444888884488828888222222228844444444
 ```
@@ -219,6 +221,7 @@ Start at level 17.5.
 ```
 
 From 1 unit left of Seaside to Uthare. **Do not buy anything; just talk to him.**
+
 Start at level 18.
 ```
 4447771
@@ -262,7 +265,7 @@ From Ramtor's Tower to Uthare (potion trader) in normal mode.
 8448488888888888444444444444477744444444444444774771117777777777777777777777777744447711
 ```
 
-**Inside Ramtor's Tower:** from the first location to somewhere near Ramtor.
+From 1 unit below below Ramtor's Tower to somewhere near Ramtor.
 
 Start at level 19 and finish at level 20.
 
@@ -272,7 +275,7 @@ The path is split into sections for training at each level:
 
 **Level 1**
 ```
-11111553335622886633
+111111553335622886633
 ```
 
 **Level 2**
