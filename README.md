@@ -162,7 +162,15 @@ From 1 unit above Potraddo to Zapka (trader).
 11177444444444478444448482633336622222222662666222222844717
 ```
 
-Go right to trade with Pipka, then go down to trade with Yeccki.
+Go right to trade with Pipka.
+```
+444
+```
+
+From 1 until diagonallyl left of Pipka to Yeccki (potions trader).
+```
+8222262284
+```
 
 From 1 unit diagonally left of Yeccki (potions trader) to the Ghost of Phorofor.
 ```
