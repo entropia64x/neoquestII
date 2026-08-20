@@ -205,8 +205,9 @@ Start at level 15.
 ```
 ========}
 
+Walk to the right to take the teleport orb of city of Phorofor.
 
-From 1 unit diagonally from the teleport orb to outside the tower on Dead Hills.
+From 1 unit diagonally from the teleport orb (inside tower in a hill) to outside the tower on Dead Hills.
 
 Start at level 16.
 ```
