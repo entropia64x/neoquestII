@@ -498,18 +498,19 @@ From Phebiya to Rathuah (potion trader).
 782226333333333363333
 ```
 
-From Rathuah to Ruined Temple.
+From Rathuah to 1 unit below Ruined Temple.
 ```
 444474711111111117747477111155115551
 ```
+**Get Inside Ruined Temple.**
 
-**Inside Ruined Temple, level 1:** to somewhere near Gebarn II.
+From level 1 to somewhere near Gebarn II.
 
 Train until level 35 or higher.
 
 **Level 1**
 ```
-5111111111555511115335
+111111111555511115335
 ```
 
 **Level 2**
