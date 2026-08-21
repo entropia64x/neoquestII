@@ -540,10 +540,10 @@ From Rathuah to 1 unit left of Velm (in Waset Village).
 
 From 1 unit left of Velm to Palace of Ancient Kings. **Do not buy anything yet.**
 ```
-5553333335555555555333366666666666666666662226223355
+555333333555555555533336666666666666666666222663335
 ```
 
-From outside the Palace of Ancient Kings to Lifra. Talk to her.
+From 1 unit below the Palace of Ancient Kings to Lifra. Talk to her. *(The script autofights the Revenant.)*
 
 Start at level 36 and finish at 37.
 ```
