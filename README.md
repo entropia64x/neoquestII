@@ -596,7 +596,7 @@ Go around Coltzan's ghost and take the centerpiece over the barrel!
 
 From 1 unit right of the barrel to outside Akhten-ka. **Take the centerpiece first!**
 ```
-22228488822228448844888222222222222222222222222
+2222848882222844884488822222222222222222222222
 ```
 
 From outside Akhten-kha to the gemstone (normal mode).
