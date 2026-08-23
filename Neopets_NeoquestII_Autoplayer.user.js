@@ -1,18 +1,12 @@
 // ==UserScript==
 // @name         Neopets: NeoQuest II: Autoplayer
 // @namespace    https://github.com/entropia64x/neoquestII/
-// @version      3.17
+// @version      3.18
 // @description  Remote control and trainer for NeoQuest II
 // @author       entropia64x
 // @match        https://www.neopets.com/games/nq2/nq2*
-// @grant        GM_log
-// @grant        GM_addStyle
 // @grant        GM_getValue
 // @grant        GM_setValue
-// @grant        GM_openInTab
-// @grant        GM_deleteValue
-// @grant        GM_xmlhttpRequest
-// @grant        GM_getResourceText
 // @include      https://www.neopets.com/games/nq2/nq2.phtml*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=neopets.com
 // ==/UserScript==
@@ -97,12 +91,12 @@ Notes on coordinates
       'Zombom',
       'a giant sand grundo',
       'Ramtor',
-      'Leximp',
+      'the Leximp',
       'Kolvars',
       'Scuzzy',
       'Siliclast',
       'Gebarn II',
-      'Revenant of the Dunes',
+      'the Revenant',
       "Coltzan's Ghost",
       'Anubits',
       'Meuka',
@@ -253,7 +247,7 @@ Notes on coordinates
       decidePath(level);
     }
 
-    function openInventory(inv, level) {
+    function openInventory(inv) {
       if (inv && GM_getValue('hasHealItems', true)) {
         GM_setValue('inv', true);
         go('?act=inv');
@@ -356,7 +350,7 @@ Notes on coordinates
 
       const PATH = paths[level] ?? (training ? '34' : path);
 
-      if ([8,10].includes(level)) {
+      if ([8, 10].includes(level)) {
         GM_setValue('first', false);
       }
 
@@ -373,6 +367,7 @@ Notes on coordinates
       }
 
       const pathIndex = GM_getValue('pathIndex', 0);
+
       if (pathIndex == 0) {
         GM_setValue('path', getPath(level));
       }
@@ -823,6 +818,7 @@ Notes on coordinates
       let healed = 0;
       let allies = false;
       let imgSrc;
+      const maxHealth = 45;
 
       for (let img of images) {
         imgSrc = img.src.split('/').at(-1);
@@ -833,7 +829,7 @@ Notes on coordinates
         }
 
         if (allies) {
-          if (imgSrc.includes('exp_green') && img.width >= 30) {
+          if (imgSrc.includes('exp_green') && img.width >= (2 / 3) * maxHealth) {
             healed += 1;
           }
         }
