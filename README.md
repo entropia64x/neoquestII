@@ -1,14 +1,22 @@
 # NeoQuest II Paths & Guide
 *(Almost everything here was originally done by NQ2guy.)*
 
-Before using the script, install **ViolentMonkey** or **TamperMonkey**, then install the script.
+Before using the script, install **ViolentMonkey** or **TamperMonkey** extension in your browser, then install the script.
 
-Start the autoplayer **1 unit diagonally left of Mother**, not above Mother, as the game does
+To install the script, open Neopets_NeoQuestII_Autoplayer.user.js and click on Raw, then click the install button.
+
+Start the autoplayer **1 unit diagonally left above of Mother**, not above Mother, as the game does
 when it starts.
 
 The script will autoplay until you reach Tebor (trader) at level 10.
 
+The script autobattles, and it follows the path you write, but you should take decisions like buy potions, weapons, armors, and assing skills to Mipsy, Talinia and Velm. The script autoassings skills for Rohane. There's an option for training, it just moves left and right and it activates the hunting mode if is not activated.
+
+Get fun!
+
 The first paths are included for nostalgia.
+
+## NOSTALGIA
 
 ## 1. Meridell
 
