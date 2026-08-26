@@ -3,14 +3,18 @@
 
 Before using the script, install **ViolentMonkey** or **TamperMonkey** extension in your browser, then install the script.
 
-To install the script, open Neopets_NeoQuestII_Autoplayer.user.js and click on Raw, then click the install button.
+To install the script, open [Neopets_NeoQuestII_Autoplayer.user.js](https://github.com/entropia64x/neoquestII/commit/a0acb1fc341d4e5ed641793adb231260572c67e8) and click on Raw, then click the install button.
 
 Start the autoplayer **1 unit diagonally left above of Mother**, not above Mother, as the game does
 when it starts.
 
 The script will autoplay until you reach Tebor (trader) at level 10.
 
-The script autobattles, and it follows the path you write in path = '', but you should take decisions like buy potions, weapons, armors, and assing skills to Mipsy, Talinia and Velm. The script autoassings skills for Rohane. There's an option for training, just make training = 1, it makes to move Rohane left and right and it activates the hunting mode if is not activated. If something goes wrong with the navigation, you can make stop = 1, it only stops the navigation but still autobattles.
+The script autobattles, and it follows the path (coordinates) you write in `path = ''`, but you should take decisions like buy potions, weapons, armors, and assing skills to Mipsy, Talinia and Velm. The script autoassings skills for Rohane.
+
+There's an option for training, just make `training = 1`, it activates the hunting mode if is not activated and it makes to move Rohane left and right.
+
+If something goes wrong with the navigation, you can make `stop = 1`, it only stops the navigation but still autobattles.
 
 Notes on coordinates
 
