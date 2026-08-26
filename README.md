@@ -16,14 +16,20 @@ There's an option for training, just make `training = 1`, it activates the hunti
 
 If something goes wrong with the navigation, you can make `stop = 1`, it only stops the navigation but still autobattles.
 
-Notes on coordinates
+**Notes on coordinates**
 
 1 = north
+
 2 = south
+
 3 = west
+
 4 = east
+
 5 = northwest
+
 6 = southwest
+
 7 = northeast
 8 = southeast
 
