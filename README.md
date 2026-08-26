@@ -10,7 +10,18 @@ when it starts.
 
 The script will autoplay until you reach Tebor (trader) at level 10.
 
-The script autobattles, and it follows the path you write, but you should take decisions like buy potions, weapons, armors, and assing skills to Mipsy, Talinia and Velm. The script autoassings skills for Rohane. There's an option for training, it just moves left and right and it activates the hunting mode if is not activated.
+The script autobattles, and it follows the path you write in path = '', but you should take decisions like buy potions, weapons, armors, and assing skills to Mipsy, Talinia and Velm. The script autoassings skills for Rohane. There's an option for training, just make training = 1, it makes to move Rohane left and right and it activates the hunting mode if is not activated. If something goes wrong with the navigation, you can make stop = 1, it only stops the navigation but still autobattles.
+
+Notes on coordinates
+
+1 = north
+2 = south
+3 = west
+4 = east
+5 = northwest
+6 = southwest
+7 = northeast
+8 = southeast
 
 Get fun!
 
