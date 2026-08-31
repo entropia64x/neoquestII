@@ -861,5 +861,5 @@ Two units left of a gate to Lyra (normal mode).
 
 From 1 unit right of Lyra to King Terask (the final battle). *(Thanks, hey3423.)*
 ```
-5111111111115288888888
+511111111111528888888
 ```
